@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 
-class grid {
+class Grid {
 private:
+    int rows;
+    int cols;
     // Holds the input file
     std::vector<std::vector<int>> grid;
-    int num_rows;
-    int num_cols;
     std::vector<std::pair<int, int>> sorted_points;
     
 public:

@@ -12,8 +12,10 @@ int main(int argc, char* argv[]) {
     int cols = atoi(argv[3]);
 
 
+//Need to find why grid, rows, and col are not identified as global
+
 //Map vector
-    std::vector<std::vector<int> > map = std::vector<std::vector<int> >(rows, std::vector<int>(cols, 0));;
+    std::vector<std::vector<int> > grid = std::vector<std::vector<int> >(rows, std::vector<int>(cols, 0));;
 
     std::ifstream file_ptr;
     file_ptr.open(f_name);
@@ -30,8 +32,14 @@ int main(int argc, char* argv[]) {
 
         for (int c = 0; c < cols; c++) {
             str_ptr >> temp;
+            std::cout<<temp<< " ";
 
-            map[r][c] = std::stoi(temp);
+            grid[r][c] = std::stoi(temp);
         }
+        std::cout<<"\n";
+
     }
+    std::cout<<"\n";
+    std::cout<<rows<< " ";
+    std::cout<<cols<< " ";
 }
