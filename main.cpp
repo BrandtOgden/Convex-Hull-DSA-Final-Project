@@ -7,6 +7,7 @@
 #include <vector>
 
 int main(int argc, char* argv[]) {
+    /*
     std::string f_name = argv[1];
     int rows = atoi(argv[2]);
     int cols = atoi(argv[3]);
@@ -42,4 +43,10 @@ int main(int argc, char* argv[]) {
     std::cout<<"\n";
     std::cout<<rows<< " ";
     std::cout<<cols<< " ";
+
+     */
+
+    // Testing sorting points
+    Grid grid("test.txt", 5, 5);
+    grid.TEST();
 }
