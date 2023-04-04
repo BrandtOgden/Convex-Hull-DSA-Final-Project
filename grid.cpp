@@ -15,57 +15,72 @@ Grid::Grid(std::string fname, int rows, int cols) {
     this->grid = {{0, 1, 0, 0, 0},
                   {1, 0, 1, 1, 0},
                   {0, 0, 1, 0, 1},
-                  {0, 1, 1, 0, 1},
-                  {1, 0, 0, 0, 0}};
+                  {0, 0, 0, 0, 1},
+                  {0, 1, 0, 0, 0}};
     this->rows = 5;
     this->cols = 5;
+    // TODO WILL EVENTUALLY CALL get_bottom_point
+    this->bot_left_point = Point(4, 1);
 }
 
-// Goes through the grid and adds all the points to the vector
-void Grid::get_all_points() {
-    // HARD CODING THIS VALUE FOR NOW
-    this->bot_left_point = std::pair<int, int> (4, 0);
+// Goes through the grid and adds all the points to the vector except for the bottom leftmost point
+std::vector<Point> Grid::get_all_points() {
+
+    std::vector<Point> points;
 
     // Loop through the grid
     for (int row = 0; row < this->grid.size(); row++) {
         for (int col = 0; col < this->grid[row].size(); col++) {
-            // If there is a 1 add the row and col to all_points vector
-            if (this->grid[row][col] == 1) {
-                this->all_points.push_back(std::pair<int, int> (row, col));
+            // If there is a 1, and it's not the bottom leftmost point add the row and col to all_points vector
+            if (this->grid[row][col] == 1 && (this->bot_left_point.row != row || this->bot_left_point.col != col)) {
+                points.push_back(Point(row, col));
             }
         }
     }
+
+    return points;
 }
 
-// Sorts those points based on angle it makes with the bottom leftmost point
+// Sorts points based on their slopes so there is no need to calculate the angle
 void Grid::sort_points() {
-    // Gets all the points and puts them into the class variable all_points
-    this->get_all_points();
-
-    // Vector that holds the unsorted values of theta
-    std::vector<float> unsorted_angles;
+    // Gets all the points except for bottom leftmost point and puts them in all_points
+    std::vector<Point> points = this->get_all_points();
 
     // Loop through all the points
-    for (int i = 0; i < this->all_points.size(); i++) {
-        // Calculates the length of the opposite side of theta
-        float opposite = std::abs(this->bot_left_point.first - this->all_points[i].first) + 1;
-        // Calculates the length of the adjacent side of theta
-        float adjacent = std::abs(this->bot_left_point.second - this->all_points[i].second) + 1;
-
-        // Calculates the angle that the point makes with the bottom leftmost point (theta)
-        float theta = std::tan(opposite/adjacent);
-
-        // Add theta to the vector
-        unsorted_angles.push_back(theta);
+    for (int i = 0; i < points.size(); i++) {
+        // Calculate their slopes
+        points[i].calculate_point_slope(this->bot_left_point);
     }
 
-    // Output all the points and their angles with the bottom leftmost point
-    for (int i = 0; i < this->all_points.size(); i++) {
-        std::cout << this->all_points[i].first << "," << this->all_points[i].second << " Angle: "
-            << unsorted_angles[i] << std::endl;
+    // Output all the points and their slopes with the bottom leftmost point
+    for (int i = 0; i < points.size(); i++) {
+        std::cout << points[i].row << "," << points[i].col << " Slope: "
+                  << points[i].slope << std::endl;
     }
+
+    // Vector to hold points with slopes >= 0
+    std::vector<Point> positive_slope_points;
+    // Vector to hold points with slopes < 0
+    std::vector<Point> negative_slope_points;
+    // Vector to hold points with undefined slopes or -inf
+    std::vector<Point> undefined_slope_points;
+
+    // Puts the points into their respective vector based on their slope
+    // unsorted_slopes and all_points are parallel vector
+    for (int i = 0; i < points.size(); i++) {
+        if (points[i].slope >= 0) {
+            positive_slope_points.push_back(points[i]);
+        } else if (points[i].slope < 0) {
+            negative_slope_points.push_back(points[i]);
+        } else {
+            undefined_slope_points.push_back(points[i]);
+        }
+    }
+
+    // TODO Sort the points based on their slopes in their respective vectors and then combine the vectors
+    // TODO to create the sorted list of points
+
 }
-
 
 // TODO TEMPORARY
 void Grid::TEST() {
