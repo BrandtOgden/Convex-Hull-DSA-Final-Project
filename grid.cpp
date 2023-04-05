@@ -77,9 +77,16 @@ void Grid::sort_points() {
         }
     }
 
-    // TODO Sort the points based on their slopes in their respective vectors and then combine the vectors
-    // TODO to create the sorted list of points
+    // TODO THINK ABOUT THIS
+    // TODO COULD BE A BETTER WAY TO DO IT?
 
+    // TODO
+
+}
+
+// Sorts a vector of points based on their slopes
+void Grid::sort(std::vector<Point> vector) {
+    
 }
 
 // TODO TEMPORARY
