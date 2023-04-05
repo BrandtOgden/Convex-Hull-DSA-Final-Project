@@ -6,6 +6,8 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <graphviz/gvc.h> // need to use -lgraphviz argument when compiling.
+// Note: gvc cgraph has been added to CMakeLists to declare which parts of the library we're using
 
 // Constructor for a Grid
 // TODO COULD CHANGE INPUT FROM TEXT FILE TO BE HANDLED HERE
