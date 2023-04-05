@@ -6,19 +6,17 @@
 #include <string>
 #include <vector>
 
-
-
 int main(int argc, char* argv[]) {
 
     std::string f_name = argv[1];
-    int row = atoi(argv[2]);
-    int col = atoi(argv[3]);
+    int row = std::stoi(argv[2]);
+    int col = std::stoi(argv[3]);
 
     Grid g(f_name, row, col);
 
-//Need to find why grid, rows, and col are not identified as global
+    //Need to find why grid, rows, and col are not identified as global
 
-//Map vector
+    //Map vector
     std::vector<std::vector<int> > grid = std::vector<std::vector<int> >(row, std::vector<int>(col, 0));;
 
     std::ifstream file_ptr;
@@ -27,7 +25,7 @@ int main(int argc, char* argv[]) {
     std::string placeholder;
     std::stringstream str_ptr(placeholder);
 
-//Constructs Map
+    //Constructs Map
     for (int r = 0; r < row; r++) {
         std::getline(file_ptr, placeholder);
         str_ptr.str(placeholder);
