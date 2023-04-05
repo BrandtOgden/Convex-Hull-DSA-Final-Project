@@ -82,9 +82,42 @@ void Grid::sort_points() {
 
 }
 
-// TODO TEMPORARY
-void Grid::TEST() {
-    sort_points();
-}
 
+//Grid::Grid(std::string f_name, int rowCount, int colCount) {
+//    // Generate a board from the give file
+//    this->rows = rowCount;
+//    this->cols = colCount;
+//
+//
+//    //Map vector
+//    grid = std::vector<std::vector<int> >(rows, std::vector<int>(cols, 0));;
+//
+//    std::ifstream file_ptr;
+//    file_ptr.open(f_name);
+//    std::string temp;
+//    std::string placeholder;
+//    std::stringstream str_ptr(placeholder);
+//
+//
+//    //Constructs Map
+//    for (int r = 0; r < rows; r++) {
+//        std::getline(file_ptr, placeholder);
+//        str_ptr.str(placeholder);
+//        str_ptr.clear();
+//        str_ptr.seekg(0);
+//
+//        for (int c = 0; c < cols; c++) {
+//            str_ptr >> temp;
+//            std::cout<<temp<< " ";
+//
+//           grid[r][c] = std::stoi(temp);
+//        }
+//        std::cout<<"\n";
+//    }
+//
+//
+//    std::cout<<"\n";
+//    std::cout<<rows<< " ";
+//    std::cout<<cols<< " ";
+//}
 
