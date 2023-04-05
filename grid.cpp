@@ -9,7 +9,7 @@
 
 // Constructor for a Grid
 // TODO COULD CHANGE INPUT FROM TEXT FILE TO BE HANDLED HERE
-Grid::Grid(std::string fname, int rows, int cols) {
+Grid::Grid(std::string f_name, int r, int c) {
     // Hard coding these values for the time being
     // TODO WILL NEED TO BE CHANGED IN ACTUAL IMPLEMENTATION
     this->grid = {{0, 1, 0, 0, 0},
@@ -21,6 +21,42 @@ Grid::Grid(std::string fname, int rows, int cols) {
     this->cols = 5;
     // TODO WILL EVENTUALLY CALL get_bottom_point
     this->bot_left_point = Point(4, 1);
+
+
+//Map vector
+
+    this->rows = r;
+    this->cols = c;
+    std::vector<std::vector<int> > grid = std::vector<std::vector<int> >(r, std::vector<int>(c, 0));;
+
+    std::ifstream file_ptr;
+    file_ptr.open(f_name);
+    std::string temp;
+    std::string placeholder;
+    std::stringstream str_ptr(placeholder);
+
+    //Constructs Map
+    for (int row = 0; row < rows; row++) {
+        std::getline(file_ptr, placeholder);
+        str_ptr.str(placeholder);
+        str_ptr.clear();
+        str_ptr.seekg(0);
+
+        for (int col = 0; col < cols; col++) {
+            str_ptr >> temp;
+            std::cout<<temp<< " ";
+
+            grid[row][col] = std::stoi(temp);
+        }
+        std::cout<<"\n";
+
+    }
+    std::cout<<"\n";
+    std::cout<<rows<< " ";
+    std::cout<<cols<< " ";
+
+
+
 }
 
 // Goes through the grid and adds all the points to the vector except for the bottom leftmost point
