@@ -166,7 +166,7 @@ void Grid::sort(std::vector<Point> vector) {
 //    std::cout<<cols<< " ";
 //}
 
-
+/*
 // TODO TEMPORARY DOT PLOT EXAMPLE
 void Grid::export_graph() {
     GVC_t *gvc;
@@ -193,3 +193,4 @@ void Grid::export_graph() {
     agclose(g);
     gvFreeContext(gvc);
 }
+*/
