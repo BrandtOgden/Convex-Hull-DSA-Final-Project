@@ -25,6 +25,8 @@ public:
 
     // TODO TEMPORARY FUNCTION TO TEST GET AND SORT POINTS
     void TEST();
+
+    void export_graph();
 };
 
 
