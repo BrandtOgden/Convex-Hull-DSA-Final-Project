@@ -1,13 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <algorithm>
 #include "point.h"
 
 class Grid {
 private:
     int rows;
     int cols;
-    // Holds the input file
     std::vector<std::vector<int>> grid;
     Point bot_left_point;
     //std::vector<std::pair<int, int>> sorted_points;
@@ -16,6 +16,7 @@ private:
     void find_bot_left();
     std::vector<Point> get_all_points();
     void sort_points();
+    void sort(std::vector<Point> vector);
     bool turn_right(Point p1, Point p2, Point p3);
     
 public:
