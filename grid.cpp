@@ -1,25 +1,14 @@
-/* TODO
-
-must download pkg-config-lite and graphviz
-need to note all of this in the report
+/* TODO - Graphviz notes for report
+must download graphviz
 make sure to check the box to add environment variable when installing graphviz
 
+update your CMAkeLists (may need to adjust file paths and things). Make sure your CMake is compiled using the template from the project then reload it for you.
+main thing is to have your Graphviz install path mapped in the CMakeLists file.
 
-update your CMAkeLists (may need to adjust file paths and things)
+Make sure to include CMakeLists text in report.
+Specifically, the classes from the Graphvz libraries have been noted in the CMakeLists file like so: gvc cgraph
 
-cmake_minimum_required(VERSION 3.24)
-project(Convex_Hull_DSA_Final_Project)
-
-set(CMAKE_CXX_STANDARD 11)
-
-set(GRAPHVIZ_INCLUDE_DIRS "C:/Program Files (x86)/Graphviz/include")
-set(GRAPHVIZ_LIBRARY_DIRS "C:/Program Files (x86)/Graphviz/lib")
-include_directories(${GRAPHVIZ_INCLUDE_DIRS})
-link_directories(${GRAPHVIZ_LIBRARY_DIRS})
-
-add_executable(Convex_Hull_DSA_Final_Project main.cpp grid.cpp grid.h)
-target_link_libraries(Convex_Hull_DSA_Final_Project gvc cgraph)
- */
+We need to use -lgraphviz argument when compiling on the command line. */
 
 #include "grid.h"
 #include <cmath>
@@ -29,8 +18,7 @@ target_link_libraries(Convex_Hull_DSA_Final_Project gvc cgraph)
 #include <cstring>
 #include <string>
 #include <vector>
-#include <graphviz/gvc.h> // need to use -lgraphviz argument when compiling.
-// Note: gvc cgraph has been added to CMakeLists to declare which parts of the library we're using
+#include <graphviz/gvc.h>
 
 // Constructor for a Grid
 Grid::Grid(std::string f_name, int r, int c) {
