@@ -5,70 +5,35 @@
 #include <cstring>
 #include <string>
 #include <vector>
-#include <graphviz/gvc.h> // need to use -lgraphviz argument when compiling
 
 int main(int argc, char* argv[]) {
 
-    GVC_t *gvc;
-    Agraph_t *g;
-
-    // Initialize the Graphviz context
-    gvc = gvContext();
-
-    // Create a new graph
-    g = agopen("MyGraph", Agdirected, NULL);
-
-    // Add some nodes and edges to the graph
-    Agnode_t *node1 = agnode(g, (char*)"Node 1", true);
-    Agnode_t *node2 = agnode(g, (char*)"Node 2", true);
-    Agnode_t *node3 = agnode(g, (char*)"Node 3", true);
-    Agedge_t *edge1 = agedge(g, node1, node2, (char*)"Edge 1", true);
-    Agedge_t *edge2 = agedge(g, node2, node3, (char*)"Edge 2", true);
-
-    // Generate the DOT output
-    gvLayout(gvc, g, "dot");
-    gvRenderFilename(gvc, g, "png", "myplot.png");
-
-    // Free the graph and context resources
-    agclose(g);
-    gvFreeContext(gvc);
-
-    /*
     std::string f_name = argv[1];
-    int rows = atoi(argv[2]);
-    int cols = atoi(argv[3]);
+    int row = std::stoi(argv[2]);
+    int col = std::stoi(argv[3]);
+
+    Grid g(f_name, row, col);
+
+    /* TODO
+
+    must download pkg-config-lite and graphviz
+    need to note all of this in the report
+    make sure to check the box to add environment variable when installing graphviz
 
 
-//Need to find why grid, rows, and col are not identified as global
+    update your CMAkeLists (may need to adjust file paths and things)
 
-//Map vector
-    std::vector<std::vector<int> > grid = std::vector<std::vector<int> >(rows, std::vector<int>(cols, 0));;
+    cmake_minimum_required(VERSION 3.24)
+    project(Convex_Hull_DSA_Final_Project)
 
-    std::ifstream file_ptr;
-    file_ptr.open(f_name);
-    std::string temp;
-    std::string placeholder;
-    std::stringstream str_ptr(placeholder);
+    set(CMAKE_CXX_STANDARD 11)
 
-//Constructs Map
-    for (int r = 0; r < rows; r++) {
-        std::getline(file_ptr, placeholder);
-        str_ptr.str(placeholder);
-        str_ptr.clear();
-        str_ptr.seekg(0);
+    set(GRAPHVIZ_INCLUDE_DIRS "C:/Program Files (x86)/Graphviz/include")
+    set(GRAPHVIZ_LIBRARY_DIRS "C:/Program Files (x86)/Graphviz/lib")
+    include_directories(${GRAPHVIZ_INCLUDE_DIRS})
+    link_directories(${GRAPHVIZ_LIBRARY_DIRS})
 
-        for (int c = 0; c < cols; c++) {
-            str_ptr >> temp;
-            std::cout<<temp<< " ";
-
-            grid[r][c] = std::stoi(temp);
-        }
-        std::cout<<"\n";
-
-    }
-    std::cout<<"\n";
-    std::cout<<rows<< " ";
-    std::cout<<cols<< " ";
-
+    add_executable(Convex_Hull_DSA_Final_Project main.cpp grid.cpp grid.h)
+    target_link_libraries(Convex_Hull_DSA_Final_Project gvc cgraph)
      */
-}
+};

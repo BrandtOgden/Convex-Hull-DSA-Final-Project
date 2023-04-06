@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/brook/Documents/Workspaces/CSC 212/DSA Project/Convex-Hull-DSA-Final-Project/grid.cpp" "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj" "gcc" "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj.d"
   "C:/Users/brook/Documents/Workspaces/CSC 212/DSA Project/Convex-Hull-DSA-Final-Project/main.cpp" "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj" "gcc" "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj.d"
+  "C:/Users/brook/Documents/Workspaces/CSC 212/DSA Project/Convex-Hull-DSA-Final-Project/point.cpp" "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj" "gcc" "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj.d"
   )
 
 # Targets to which this target links.

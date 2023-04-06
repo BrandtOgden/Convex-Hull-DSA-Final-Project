@@ -176,6 +176,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Convex_Hull_DSA_Final_Project.dir\build.make CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+point.obj: point.cpp.obj
+.PHONY : point.obj
+
+# target to build an object file
+point.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Convex_Hull_DSA_Final_Project.dir\build.make CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj
+.PHONY : point.cpp.obj
+
+point.i: point.cpp.i
+.PHONY : point.i
+
+# target to preprocess a source file
+point.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Convex_Hull_DSA_Final_Project.dir\build.make CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.i
+.PHONY : point.cpp.i
+
+point.s: point.cpp.s
+.PHONY : point.s
+
+# target to generate assembly for a file
+point.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Convex_Hull_DSA_Final_Project.dir\build.make CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.s
+.PHONY : point.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -191,6 +215,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... point.obj
+	@echo ... point.i
+	@echo ... point.s
 .PHONY : help
 
 

@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj.d"
   "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj"
   "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj.d"
+  "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj"
+  "CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj.d"
   "Convex_Hull_DSA_Final_Project.exe"
   "Convex_Hull_DSA_Final_Project.exe.manifest"
   "Convex_Hull_DSA_Final_Project.pdb"
