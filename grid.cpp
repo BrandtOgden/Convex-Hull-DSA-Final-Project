@@ -113,10 +113,6 @@ void Grid::sort_points() {
 
 }
 
-// Sorts a vector of points based on their slopes
-void Grid::sort(std::vector<Point> vector) {
-
-}
 
 void Grid::export_graph() {
     GVC_t *gvc;
