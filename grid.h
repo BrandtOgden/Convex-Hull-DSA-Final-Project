@@ -25,4 +25,5 @@ public:
 
     void export_graph();
 
+    void get_bottom_point();
 };
