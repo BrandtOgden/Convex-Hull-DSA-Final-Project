@@ -22,6 +22,7 @@ private:
 public:
     // TODO CAN CHANGE SO THAT INPUT FROM TEXT FILE IS BEING DONE IN CONSTRUCTOR
     Grid(std::string fname, int rows, int cols);
+    void display_grid();
     void calculate_convex_hull();
 
     // TODO TEMPORARY FUNCTION TO TEST GET AND SORT POINTS

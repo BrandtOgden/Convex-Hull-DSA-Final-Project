@@ -33,55 +33,35 @@ target_link_libraries(Convex_Hull_DSA_Final_Project gvc cgraph)
 // Note: gvc cgraph has been added to CMakeLists to declare which parts of the library we're using
 
 // Constructor for a Grid
-// TODO COULD CHANGE INPUT FROM TEXT FILE TO BE HANDLED HERE
 Grid::Grid(std::string f_name, int r, int c) {
-    // Hard coding these values for the time being
-    // TODO WILL NEED TO BE CHANGED IN ACTUAL IMPLEMENTATION
-    this->grid = {{0, 1, 0, 0, 0},
-                  {1, 0, 1, 1, 0},
-                  {0, 0, 1, 0, 1},
-                  {0, 0, 0, 0, 1},
-                  {0, 1, 0, 0, 0}};
-    this->rows = 5;
-    this->cols = 5;
     // TODO WILL EVENTUALLY CALL get_bottom_point
     this->bot_left_point = Point(4, 1);
 
 
-//Map vector
-/*
     this->rows = r;
     this->cols = c;
-    std::vector<std::vector<int> > grid = std::vector<std::vector<int> >(r, std::vector<int>(c, 0));;
+    this->grid = std::vector<std::vector<int> >(r, std::vector<int>(c, 0));;
 
     std::ifstream file_ptr;
     file_ptr.open(f_name);
-    std::string temp;
+    int temp;
     std::string placeholder;
     std::stringstream str_ptr(placeholder);
 
     //Constructs Map
-    for (int row = 0; row < rows; row++) {
+    for (int row = 0; row < this->rows; row++) {
         std::getline(file_ptr, placeholder);
         str_ptr.str(placeholder);
         str_ptr.clear();
         str_ptr.seekg(0);
 
-        for (int col = 0; col < cols; col++) {
+        for (int col = 0; col < this->cols; col++) {
             str_ptr >> temp;
-            std::cout<<temp<< " ";
 
-            grid[row][col] = std::stoi(temp);
+            this->grid[row][col] = temp;
         }
-        std::cout<<"\n";
 
     }
-    std::cout<<"\n";
-    std::cout<<rows<< " ";
-    std::cout<<cols<< " ";
-
-
-*/
 }
 
 // Goes through the grid and adds all the points to the vector except for the bottom leftmost point
@@ -174,4 +154,13 @@ void Grid::export_graph() {
     // Free the graph and context resources
     agclose(g);
     gvFreeContext(gvc);
+}
+
+void Grid::display_grid() {
+    for (int row = 0; row < this->rows; row++) {
+        for (int col = 0; col < this->cols; col++) {
+            std::cout << grid[row][col] << " ";
+        }
+        std::cout << "\n";
+    }
 }

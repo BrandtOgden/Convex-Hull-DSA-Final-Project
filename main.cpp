@@ -14,6 +14,8 @@ int main(int argc, char* argv[]) {
 
     Grid g(f_name, row, col);
 
+    g.display_grid();
+
     /* TODO
 
     must download pkg-config-lite and graphviz
