@@ -120,7 +120,6 @@ void Grid::sort_points() {
 
     // Add the undefined points
     // The point at the first index will be the outermost point with an undefined slope so that's the only one we need
-    // TODO CHECK THIS TO MAKE SURE
     this->sorted_points.push_back(undefined_slope_points[0]);
 
     // Add the lowest negative slopes
@@ -140,6 +139,27 @@ void Grid::sort_points() {
     }
     // When the vector is size 1 add the last one
     this->sorted_points.push_back(negative_slope_points[0]);
+}
+
+// Actually calculates which points are part of the convex hull
+// Returns them as a vector of points
+std::stack<Point> Grid::calculate_convex_hull() {
+    // Stack to hold the points that are part of the convex hull
+    std::stack<Point> convex_hull;
+
+    // Sort all the points based on the angle they make with the bottom leftmost point
+    this->sort_points();
+
+    // TODO
+    // If the size of sorted_points is 1 or there are two total points then a convex hull is not possible
+
+    // The bottom left point is part of the convex hull
+    convex_hull.push(this->bot_left_point);
+    // The first two points in the sorted array are part of the convex hull
+    convex_hull.push(this->sorted_points[0]);
+    convex_hull.push(this->sorted_points[1]);
+
+    // TODO REST OF ALGORITHM
 }
 
 void Grid::TEST() {

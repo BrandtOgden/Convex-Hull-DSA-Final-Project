@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <algorithm>
+#include <stack>
 #include "point.h"
 
 class Grid {
@@ -13,6 +13,7 @@ private:
     std::vector<Point> sorted_points;
 
     // Helper methods for calculating the convex hull
+    void get_bottom_point();
     std::vector<Point> get_all_points();
     void sort_points();
     bool turn_right(Point p1, Point p2, Point p3);
@@ -20,11 +21,9 @@ private:
 public:
     Grid(std::string fname, int rows, int cols);
     void display_grid();
-    void calculate_convex_hull();
+    std::stack<Point> calculate_convex_hull();
 
     void export_graph();
-
-    void get_bottom_point();
 
     void TEST();
 };
