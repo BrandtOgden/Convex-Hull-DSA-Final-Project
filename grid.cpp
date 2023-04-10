@@ -22,11 +22,6 @@ We need to use -lgraphviz argument when compiling on the command line. */
 
 // Constructor for a Grid
 Grid::Grid(std::string f_name, int r, int c) {
-
-    // Call to get_bottom point assigns private variable "bottom_left_point" the proper value
-    get_bottom_point();
-
-
     this->rows = r;
     this->cols = c;
     this->grid = std::vector<std::vector<int> >(r, std::vector<int>(c, 0));;
@@ -49,8 +44,12 @@ Grid::Grid(std::string f_name, int r, int c) {
 
             this->grid[row][col] = temp;
         }
-
     }
+
+    // Call to get_bottom point assigns private variable "bottom_left_point" the proper value
+    //get_bottom_point();
+    // TODO TEMPORARY HARD CODING
+    this->bot_left_point = Point(4, 1);
 }
 
 // Goes through the grid and adds all the points to the vector except for the bottom leftmost point
@@ -82,12 +81,6 @@ void Grid::sort_points() {
         points[i].calculate_point_slope(this->bot_left_point);
     }
 
-    // Output all the points and their slopes with the bottom leftmost point
-    for (int i = 0; i < points.size(); i++) {
-        std::cout << points[i].row << "," << points[i].col << " Slope: "
-                  << points[i].slope << std::endl;
-    }
-
     // Vector to hold points with slopes >= 0
     std::vector<Point> positive_slope_points;
     // Vector to hold points with slopes < 0
@@ -96,22 +89,67 @@ void Grid::sort_points() {
     std::vector<Point> undefined_slope_points;
 
     // Puts the points into their respective vector based on their slope
-    // unsorted_slopes and all_points are parallel vector
     for (int i = 0; i < points.size(); i++) {
         if (points[i].slope >= 0) {
             positive_slope_points.push_back(points[i]);
-        } else if (points[i].slope < 0) {
-            negative_slope_points.push_back(points[i]);
-        } else {
+        } else if (points[i].slope == -INFINITY) {
             undefined_slope_points.push_back(points[i]);
+        } else {
+            negative_slope_points.push_back(points[i]);
         }
     }
 
-    // TODO THINK ABOUT THIS
-    // TODO COULD BE A BETTER WAY TO DO IT?
+    // Loop through all the different vectors and append the points with the smallest slopes first
+    // Positive slopes
+    while (positive_slope_points.size() > 1) {
+        Point min_point = positive_slope_points[0];
+        int index = 0;
+        for (int i = 1; i < positive_slope_points.size(); i++) {
+            if (positive_slope_points[i].slope < min_point.slope) {
+                min_point = positive_slope_points[i];
+                index = i;
+            }
+        }
+        // Add it to sorted points
+        this->sorted_points.push_back(min_point);
+        // Remove it from the vector
+        positive_slope_points.erase(positive_slope_points.begin() + index);
+    }
+    // When the vector is size 1 add the last one
+    this->sorted_points.push_back(positive_slope_points[0]);
 
-    // TODO
+    // Add the undefined points
+    // The point at the first index will be the outermost point with an undefined slope so that's the only one we need
+    // TODO CHECK THIS TO MAKE SURE
+    this->sorted_points.push_back(undefined_slope_points[0]);
 
+    // Add the lowest negative slopes
+    while (negative_slope_points.size() > 1) {
+        Point min_point = negative_slope_points[0];
+        int index = 0;
+        for (int i = 1; i < negative_slope_points.size(); i++) {
+            if (negative_slope_points[i].slope < min_point.slope) {
+                min_point = negative_slope_points[i];
+                index = i;
+            }
+        }
+        // Add it to sorted points
+        this->sorted_points.push_back(min_point);
+        // Remove it from the vector
+        negative_slope_points.erase(negative_slope_points.begin() + index);
+    }
+    // When the vector is size 1 add the last one
+    this->sorted_points.push_back(negative_slope_points[0]);
+}
+
+void Grid::TEST() {
+    // Sort the points
+    sort_points();
+
+    // Output all the points and their slopes with the bottom leftmost point
+    for (int i = 0; i < this->sorted_points.size(); i++) {
+        std::cout << this->sorted_points[i].row << "," << this->sorted_points[i].col << std::endl;
+    }
 }
 
 

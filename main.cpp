@@ -16,6 +16,8 @@ int main(int argc, char* argv[]) {
 
     g.display_grid();
 
+    g.TEST();
+
     /* TODO
 
     must download pkg-config-lite and graphviz
