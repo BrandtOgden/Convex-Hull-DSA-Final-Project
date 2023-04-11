@@ -10,18 +10,18 @@
 // Constructor for a Grid
 // TODO COULD CHANGE INPUT FROM TEXT FILE TO BE HANDLED HERE
 Grid::Grid(std::string f_name, int r, int c) {
-    // Hard coding these values for the time being
-    // TODO WILL NEED TO BE CHANGED IN ACTUAL IMPLEMENTATION
-    this->grid = {{0, 1, 0, 0, 0},
-                  {1, 0, 1, 1, 0},
-                  {0, 0, 1, 0, 1},
-                  {0, 0, 0, 0, 1},
-                  {0, 1, 0, 0, 0}};
-    this->rows = 5;
-    this->cols = 5;
-    // TODO WILL EVENTUALLY CALL get_bottom_point
-    this->bot_left_point = Point(4, 1);
-
+//    // Hard coding these values for the time being
+//    // TODO WILL NEED TO BE CHANGED IN ACTUAL IMPLEMENTATION
+//    this->grid = {{0, 1, 0, 0, 0},
+//                  {1, 0, 1, 1, 0},
+//                  {0, 0, 1, 0, 1},
+//                  {0, 0, 0, 0, 1},
+//                  {0, 1, 0, 0, 0}};
+//    this->rows = 5;
+//    this->cols = 5;
+//    // TODO WILL EVENTUALLY CALL get_bottom_point
+//    this->bot_left_point = Point(4, 1);
+//
 
 //Map vector
 
@@ -44,6 +44,7 @@ Grid::Grid(std::string f_name, int r, int c) {
 
         for (int col = 0; col < cols; col++) {
             str_ptr >> temp;
+            //Prints Map
             std::cout<<temp<< " ";
 
             grid[row][col] = std::stoi(temp);
@@ -51,12 +52,11 @@ Grid::Grid(std::string f_name, int r, int c) {
         std::cout<<"\n";
 
     }
+
+    //Prints Rows/Cols
     std::cout<<"\n";
     std::cout<<rows<< " ";
     std::cout<<cols<< " ";
-
-
-
 }
 
 // Goes through the grid and adds all the points to the vector except for the bottom leftmost point
@@ -126,41 +126,73 @@ void Grid::sort(std::vector<Point> vector) {
 }
 
 
-//Grid::Grid(std::string f_name, int rowCount, int colCount) {
-//    // Generate a board from the give file
-//    this->rows = rowCount;
-//    this->cols = colCount;
+bool turn_right(Point p1, Point p2, Point p3) {
+    Point tempP2 = p2;
+    Point tempP3 = p3;
+
+    tempP2.calculate_point_slope(p1);
+    tempP3.calculate_point_slope(p1);
 //
 //
-//    //Map vector
-//    grid = std::vector<std::vector<int> >(rows, std::vector<int>(cols, 0));;
-//
-//    std::ifstream file_ptr;
-//    file_ptr.open(f_name);
-//    std::string temp;
-//    std::string placeholder;
-//    std::stringstream str_ptr(placeholder);
-//
-//
-//    //Constructs Map
-//    for (int r = 0; r < rows; r++) {
-//        std::getline(file_ptr, placeholder);
-//        str_ptr.str(placeholder);
-//        str_ptr.clear();
-//        str_ptr.seekg(0);
-//
-//        for (int c = 0; c < cols; c++) {
-//            str_ptr >> temp;
-//            std::cout<<temp<< " ";
-//
-//           grid[r][c] = std::stoi(temp);
-//        }
-//        std::cout<<"\n";
+//    float riseP2, riseP3;
+//    // Similar code to the calculate_point_slope function
+//    if (p1.row == p2.row) {
+//        riseP2 = 0;
+//    } else {
+//        riseP2 = p2.row - p1.row;
 //    }
 //
+//    if (p1.row == p3.row) {
+//        riseP3 = 0;
+//    } else {
+//        riseP3 = p3.row - p1.row;
+//    }
 //
-//    std::cout<<"\n";
-//    std::cout<<rows<< " ";
-//    std::cout<<cols<< " ";
-//}
+//    // Calculates the length of the run
+//    float runP2, runP3;
+//    // If it is in the same column as bot left point
+//    if (p1.col == p2.col) {
+//        runP2 = 0;
+//    } else {
+//        runP2 = p1.col - p2.col;
+//    }
+//
+//    if (p1.col == p3.col) {
+//        runP3 = 0;
+//    } else {
+//        runP3 = p1.col - p3.col;
+//    }
+//
+//    // Calculates the slope
+//    // If adjacent is 0 then the slope is undefined -inf
+//    int slopeP2 = riseP2 / runP2;
+//    int slopeP3 = riseP3 / runP3;
+
+    // If P2's slope is positive and P3's slope is negative (automatic false)
+    if (tempP2.slope > 0 and tempP3.slope < 0) {
+        return false;
+    }
+
+
+
+    // If both are positive
+    else if (tempP2.slope > 0 and tempP3.slope > 0) {
+        //Does not turn right or it is parallel with P1 and P2
+        if (tempP2.slope <= tempP3.slope) {
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
+
+    else {
+        return false;
+    }
+
+//Find respective slope of P2-P1 and P3-P1
+//Slope respective to P1?
+}
+
 

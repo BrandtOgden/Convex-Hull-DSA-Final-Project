@@ -13,5 +13,6 @@ int main(int argc, char* argv[]) {
     int col = std::stoi(argv[3]);
 
     Grid g(f_name, row, col);
-    
+
+
 };
