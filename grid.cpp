@@ -236,3 +236,35 @@ void Grid::get_bottom_point() {
         }
     }
 }
+
+
+
+bool turn_right(Point p1, Point p2, Point p3) {
+    Point tempP2 = p2;
+    Point tempP3 = p3;
+
+    tempP2.calculate_point_slope(p1);
+    tempP3.calculate_point_slope(p1);
+
+    // If P2's slope is positive and P3's slope is negative (automatic false)
+    if (tempP2.slope > 0 and tempP3.slope < 0) {
+        return false;
+    }
+
+        // If both are positive
+    else if (tempP2.slope > 0 and tempP3.slope > 0) {
+        //Does not turn right or it is parallel with P1 and P2
+        if (tempP2.slope <= tempP3.slope) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    else {
+        return false;
+    }
+}
+
+
