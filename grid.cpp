@@ -157,7 +157,26 @@ std::stack<Point> Grid::calculate_convex_hull() {
     convex_hull.push(this->sorted_points[0]);
     convex_hull.push(this->sorted_points[1]);
 
-    // TODO REST OF ALGORITHM
+    /*
+    // Loop through until the rest of the points in sorted_points
+    for (int i = 2; i < this->sorted_points.size(); i ++) {
+        // The point that is on the top of the stack is the point that we are unsure if it is actually
+        // part of the convex hull
+        Point middle_point = convex_hull.top();
+        // Remove that point from the stack for now
+        convex_hull.pop();
+        // If the point at the top of the stack, the middle point, and the point in sorted points turn right
+        if (turn_right(convex_hull.top(), middle_point, this->sorted_points[i])) {
+            // The middle point is not part of the convex hull but the point in sorted points is
+            convex_hull.push(this->sorted_points[i]);
+        } else {
+            // If there is no right turn then the middle point is part of the convex hull
+            convex_hull.push(middle_point);
+            convex_hull.push(this->sorted_points[i]);
+        }
+    }
+     */
+    return convex_hull;
 }
 
 void Grid::TEST() {
