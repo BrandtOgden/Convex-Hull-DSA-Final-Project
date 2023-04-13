@@ -6,6 +6,8 @@
 #include <cstring>
 #include <string>
 #include <vector>
+//#include <graphviz/gvc.h> // need to use -lgraphviz argument when compiling.
+// Note: gvc cgraph has been added to CMakeLists to declare which parts of the library we're using
 
 // Constructor for a Grid
 // TODO COULD CHANGE INPUT FROM TEXT FILE TO BE HANDLED HERE
@@ -196,3 +198,31 @@ bool turn_right(Point p1, Point p2, Point p3) {
 }
 
 
+/*
+// TODO TEMPORARY DOT PLOT EXAMPLE
+void Grid::export_graph() {
+    GVC_t *gvc;
+    Agraph_t *g;
+
+    // Initialize the Graphviz context
+    gvc = gvContext();
+
+    // Create a new graph
+    g = agopen("MyGraph", Agdirected, NULL);
+
+    // Add some nodes and edges to the graph
+    Agnode_t *node1 = agnode(g, (char*)"Node 1", true);
+    Agnode_t *node2 = agnode(g, (char*)"Node 2", true);
+    Agnode_t *node3 = agnode(g, (char*)"Node 3", true);
+    Agedge_t *edge1 = agedge(g, node1, node2, (char*)"Edge 1", true);
+    Agedge_t *edge2 = agedge(g, node2, node3, (char*)"Edge 2", true);
+
+    // Generate the DOT output
+    gvLayout(gvc, g, "dot");
+    gvRenderFilename(gvc, g, "png", "myplot.png");
+
+    // Free the graph and context resources
+    agclose(g);
+    gvFreeContext(gvc);
+}
+*/
