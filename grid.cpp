@@ -47,9 +47,7 @@ Grid::Grid(std::string f_name, int r, int c) {
     }
 
     // Call to get_bottom point assigns private variable "bottom_left_point" the proper value
-    //get_bottom_point();
-    // TODO TEMPORARY HARD CODING
-    this->bot_left_point = Point(4, 1);
+    get_bottom_point();
 }
 
 // Goes through the grid and adds all the points to the vector except for the bottom leftmost point
@@ -210,12 +208,11 @@ void Grid::display_grid() {
 
 void Grid::get_bottom_point() {
     //this method will loop through the grid to find the lowest most left point
-
     for (int i = this->rows - 1; i >= 0; i--){
         for (int j = 0; j < this->cols; j++){
             if (this->grid[i][j] == 1) {
                 this->bot_left_point = Point(i, j);
-                break;
+                return;
             }
         }
     }
