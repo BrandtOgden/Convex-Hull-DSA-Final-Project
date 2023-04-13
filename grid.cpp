@@ -137,6 +137,10 @@ void Grid::sort_points() {
     }
     // When the vector is size 1 add the last one
     this->sorted_points.push_back(negative_slope_points[0]);
+
+//    for (int i = 0; i < sorted_points.size(); i++) {
+//        std::cout<<sorted_points[i].slope<<std::endl;
+//    }
 }
 
 // Actually calculates which points are part of the convex hull
@@ -157,7 +161,7 @@ std::stack<Point> Grid::calculate_convex_hull() {
     convex_hull.push(this->sorted_points[0]);
     convex_hull.push(this->sorted_points[1]);
 
-    std::cout << turn_right(Point(1,3), Point(2,2), Point(1,2));
+    std::cout << turn_right(Point(0,1), Point(1,0), Point(3,0));
     /*
 
     // Loop through until the rest of the points in sorted_points
@@ -232,30 +236,21 @@ void Grid::get_bottom_point() {
 
 
 bool Grid::turn_right(Point p1, Point p2, Point p3) {
-    Point tempP2 = p2;
-    Point tempP3 = p3;
+    //Cross product is a measurement of the two points angle in respect to p1
+    //Eliminates the need to calculate slope
+    float cross_product = (p2.row - p1.row) * (p3.row - p1.row) - (p2.col - p1.col) * (p3.col - p1.col);
 
-    tempP2.calculate_point_slope(p1);
-    tempP3.calculate_point_slope(p1);
+    //To determine if p3 is to the right (d -> cross_product):
+        //if (d>0) then C is to the left
+        //if (d=0) then C is on the same line
+        //if (d<0) then C is to the right.
 
-    // If P2's slope is positive and P3's slope is negative (automatic false)
-    if (tempP2.slope > 0 and tempP3.slope < 0) {
-        return false;
+    //Returns true if dots turn right
+    if (cross_product < 0) {
+        return 1;
     }
-
-        // If both are positive
-    else if (tempP2.slope > 0 and tempP3.slope > 0) {
-        //Does not turn right or it is parallel with P1 and P2
-        if (tempP2.slope <= tempP3.slope) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-
     else {
-        return false;
+        return 0;
     }
 }
 
