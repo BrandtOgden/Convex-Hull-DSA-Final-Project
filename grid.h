@@ -24,6 +24,4 @@ public:
     std::stack<Point> calculate_convex_hull();
 
     void export_graph();
-
-    void TEST();
 };

@@ -39,3 +39,11 @@ void Point::calculate_point_slope(Point bot_left_point) {
     // If adjacent is 0 then the slope is undefined -inf
     this->slope = rise / run;
 }
+
+int Point::get_row() {
+    return this->row;
+}
+
+int Point::get_col() {
+    return this->col;
+}

@@ -157,7 +157,9 @@ std::stack<Point> Grid::calculate_convex_hull() {
     convex_hull.push(this->sorted_points[0]);
     convex_hull.push(this->sorted_points[1]);
 
+    std::cout << turn_right(Point(1,3), Point(2,2), Point(1,2));
     /*
+
     // Loop through until the rest of the points in sorted_points
     for (int i = 2; i < this->sorted_points.size(); i ++) {
         // The point that is on the top of the stack is the point that we are unsure if it is actually
@@ -175,20 +177,10 @@ std::stack<Point> Grid::calculate_convex_hull() {
             convex_hull.push(this->sorted_points[i]);
         }
     }
+
      */
     return convex_hull;
 }
-
-void Grid::TEST() {
-    // Sort the points
-    sort_points();
-
-    // Output all the points and their slopes with the bottom leftmost point
-    for (int i = 0; i < this->sorted_points.size(); i++) {
-        std::cout << this->sorted_points[i].row << "," << this->sorted_points[i].col << std::endl;
-    }
-}
-
 
 void Grid::export_graph() {
     GVC_t *gvc;
@@ -239,7 +231,7 @@ void Grid::get_bottom_point() {
 
 
 
-bool turn_right(Point p1, Point p2, Point p3) {
+bool Grid::turn_right(Point p1, Point p2, Point p3) {
     Point tempP2 = p2;
     Point tempP3 = p3;
 
