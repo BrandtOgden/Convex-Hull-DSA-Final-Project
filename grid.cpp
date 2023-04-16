@@ -161,9 +161,6 @@ std::stack<Point> Grid::calculate_convex_hull() {
     convex_hull.push(this->sorted_points[0]);
     convex_hull.push(this->sorted_points[1]);
 
-    std::cout << turn_right(Point(1,4), Point(1,3), Point(0,3));
-    /*
-
     // Loop through until the rest of the points in sorted_points
     for (int i = 2; i < this->sorted_points.size(); i ++) {
         // The point that is on the top of the stack is the point that we are unsure if it is actually
@@ -181,8 +178,6 @@ std::stack<Point> Grid::calculate_convex_hull() {
             convex_hull.push(this->sorted_points[i]);
         }
     }
-
-     */
     return convex_hull;
 }
 
@@ -246,14 +241,11 @@ bool Grid::turn_right(Point p1, Point p2, Point p3) {
         //if (d<0) then C is to the right.
 
     //Returns true if dots turn right
-
-    std::cout<<"Cross Product: "<<cross_product<<"\n";
-
     if (cross_product < 0) {
-        return 1;
+        return true;
     }
     else {
-        return 0;
+        return false;
     }
 }
 

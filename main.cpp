@@ -21,12 +21,10 @@ int main(int argc, char* argv[]) {
     std::stack<Point> stack = g.calculate_convex_hull();
 
     // Displays the stack
-    /*
     while (!stack.empty()) {
         std::cout << stack.top().get_row() << "," << stack.top().get_col() << std::endl;
         stack.pop();
     }
-     */
 
     /* TODO
 
