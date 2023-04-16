@@ -161,7 +161,7 @@ std::stack<Point> Grid::calculate_convex_hull() {
     convex_hull.push(this->sorted_points[0]);
     convex_hull.push(this->sorted_points[1]);
 
-    std::cout << turn_right(Point(0,1), Point(1,0), Point(3,0));
+    std::cout << turn_right(Point(1,4), Point(1,3), Point(0,3));
     /*
 
     // Loop through until the rest of the points in sorted_points
@@ -238,7 +238,7 @@ void Grid::get_bottom_point() {
 bool Grid::turn_right(Point p1, Point p2, Point p3) {
     //Cross product is a measurement of the two points angle in respect to p1
     //Eliminates the need to calculate slope
-    float cross_product = (p2.row - p1.row) * (p3.row - p1.row) - (p2.col - p1.col) * (p3.col - p1.col);
+    float cross_product = ((p2.row - p1.row) * (p3.col - p1.col)) - ((p2.col - p1.col) * (p3.row - p1.row));
 
     //To determine if p3 is to the right (d -> cross_product):
         //if (d>0) then C is to the left
@@ -246,6 +246,9 @@ bool Grid::turn_right(Point p1, Point p2, Point p3) {
         //if (d<0) then C is to the right.
 
     //Returns true if dots turn right
+
+    std::cout<<"Cross Product: "<<cross_product<<"\n";
+
     if (cross_product < 0) {
         return 1;
     }
