@@ -19,6 +19,8 @@ We need to use -lgraphviz argument when compiling on the command line. */
 #include <vector>
 #include <graphviz/gvc.h>
 #include <ctime>
+#include <algorithm>
+#include <set>
 
 // Default Constructor
 Grid::Grid() {
@@ -121,6 +123,10 @@ void Grid::sort_points() {
     // Vector to hold points with undefined slopes or -inf
     std::vector<Point> undefined_slope_points;
 
+    // Set that holds all the slopes, so we don't add duplicate slopes
+    // Does this using a set to guarantee O(log n) time complexity
+    std::set<float> slopes;
+
     // Puts the points into their respective vector based on their slope
     for (int i = 0; i < points.size(); i++) {
         if (points[i].slope >= 0) {
@@ -143,13 +149,18 @@ void Grid::sort_points() {
                 index = i;
             }
         }
-        // Add it to sorted points
-        this->sorted_points.push_back(min_point);
+        // If the slope has not already been added
+        if (slopes.find(min_point.slope) == slopes.end()) {
+            // Add it to the sorted points vector
+            this->sorted_points.push_back(min_point);
+            // Add its slope to the slopes set
+            slopes.insert(min_point.slope);
+        }
         // Remove it from the vector
         positive_slope_points.erase(positive_slope_points.begin() + index);
     }
-    // When the vector is size 1 add the last one
-    if (positive_slope_points.size() == 1) {
+    // When the vector is size 1 add the last one if that slope has not already been added
+    if (positive_slope_points.size() == 1 && slopes.find(positive_slope_points[0].slope) == slopes.end()) {
         this->sorted_points.push_back(positive_slope_points[0]);
     }
 
@@ -169,13 +180,18 @@ void Grid::sort_points() {
                 index = i;
             }
         }
-        // Add it to sorted points
-        this->sorted_points.push_back(min_point);
+        // If the slope has not already been added
+        if (slopes.find(min_point.slope) == slopes.end()) {
+            // Add it to sorted points
+            this->sorted_points.push_back(min_point);
+            // Add the slope to the slopes set
+            slopes.insert(min_point.slope);
+        }
         // Remove it from the vector
         negative_slope_points.erase(negative_slope_points.begin() + index);
     }
     // When the vector is size 1 add the last one
-    if (negative_slope_points.size() == 1) {
+    if (negative_slope_points.size() == 1 && slopes.find(negative_slope_points[0].slope) == slopes.end()) {
         this->sorted_points.push_back(negative_slope_points[0]);
     }
 }
@@ -278,7 +294,7 @@ bool Grid::turn_right(Point p1, Point p2, Point p3) {
         //if (d<0) then C is to the right.
 
     //Returns true if dots turn right
-    if (cross_product < 0) {
+    if (cross_product <= 0) {
         return true;
     }
     else {
