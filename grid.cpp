@@ -33,7 +33,8 @@ Grid::Grid(std::string f_name, int r, int c) {
     this->grid = std::vector<std::vector<int> >(r, std::vector<int>(c, 0));;
 
     std::ifstream file_ptr;
-    file_ptr.open(f_name);
+    std::string path = "TestFiles/" + f_name;
+    file_ptr.open(path);
     int temp;
     std::string placeholder;
     std::stringstream str_ptr(placeholder);
