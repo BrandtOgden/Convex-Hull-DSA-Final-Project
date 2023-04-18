@@ -25,5 +25,12 @@ public:
     void display_grid();
     std::stack<Point> calculate_convex_hull();
 
+    void TEST() {
+        std::vector<Point> all_points = get_all_points();
+        for (int i = 0; i < all_points.size(); i++) {
+            std::cout << all_points[i].row << "," << all_points[i].col << std::endl;
+        }
+    }
+
     void export_graph();
 };

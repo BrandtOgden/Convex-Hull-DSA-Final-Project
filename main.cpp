@@ -24,6 +24,9 @@ int main(int argc, char* argv[]) {
 
     g.display_grid();
 
+    //g.TEST();
+
+
     // Calculates points in convex hull
     // FOR RIGHT NOW JUST PRINTS THE CASE FOR AN ERROR IN TURN_RIGHT
     std::stack<Point> stack = g.calculate_convex_hull();
@@ -33,6 +36,8 @@ int main(int argc, char* argv[]) {
         std::cout << stack.top().get_row() << "," << stack.top().get_col() << std::endl;
         stack.pop();
     }
+
+
 
 
     /* TODO

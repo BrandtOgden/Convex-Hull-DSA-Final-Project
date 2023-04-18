@@ -92,9 +92,35 @@ std::vector<Point> Grid::get_all_points() {
 
     std::vector<Point> points;
 
-    // Loop through the grid
+    /*
+
+    // Loop through the points in a circular manner starting at the outside
+    // This is so that the points that are furthest to the outside are added first
+    // and if they have the same slope with other points inside then they are not added
+
+    int iteration = 0;
+
+    while (iteration != (this->rows / 2) + 1) {
+        for (int row = iteration; row < this->rows-iteration; row++) {
+            for (int col = iteration; col < this->cols-iteration; col++) {
+                if (this->grid[row][col] == 1 && (row == iteration || row == this->rows - iteration - 1)
+                && (this->bot_left_point.row != row || this->bot_left_point.col != col)) {
+                    points.push_back(Point(row, col));
+                } else if (this->grid[row][col] == 1 && (col == iteration || col == this->cols - iteration - 1)
+                && (this->bot_left_point.row != row || this->bot_left_point.col != col)) {
+                    points.push_back(Point(row, col));
+                }
+            }
+        }
+        iteration++;
+    }
+
+     */
+
+
+    // Loop through the grid starting from the right
     for (int row = 0; row < this->grid.size(); row++) {
-        for (int col = 0; col < this->grid[row].size(); col++) {
+        for (int col = this->grid[row].size(); col >= 0; col--) {
             // If there is a 1, and it's not the bottom leftmost point add the row and col to all_points vector
             if (this->grid[row][col] == 1 && (this->bot_left_point.row != row || this->bot_left_point.col != col)) {
                 points.push_back(Point(row, col));
@@ -149,12 +175,18 @@ void Grid::sort_points() {
                 index = i;
             }
         }
+        auto pos_found = slopes.find(min_point.slope);
         // If the slope has not already been added
-        if (slopes.find(min_point.slope) == slopes.end()) {
+        if (pos_found == slopes.end()) {
             // Add it to the sorted points vector
             this->sorted_points.push_back(min_point);
             // Add its slope to the slopes set
             slopes.insert(min_point.slope);
+        } else {
+            // If a point with the same slope has already been added
+            //int index_found = distance(slopes.begin(), pos_found);
+            // Add the point that is in the outermost position or has the greatest row
+            //if (min_point.row > *pos_found)
         }
         // Remove it from the vector
         positive_slope_points.erase(positive_slope_points.begin() + index);
