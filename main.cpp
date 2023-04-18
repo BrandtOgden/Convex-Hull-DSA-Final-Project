@@ -1,10 +1,6 @@
 #include "grid.h"
-#include <sstream>
-#include <fstream>
 #include <iostream>
-#include <cstring>
 #include <string>
-#include <vector>
 
 int main(int argc, char* argv[]) {
 
@@ -12,7 +8,18 @@ int main(int argc, char* argv[]) {
     int row = std::stoi(argv[2]);
     int col = std::stoi(argv[3]);
 
-    Grid g(f_name, row, col);
+    Grid g;
+
+    // If the file name is "random" then use the random grid constructor
+    if (f_name == "random") {
+        g = Grid(row, col);
+    } else {
+        g = Grid(f_name, row, col);
+    }
+
+    // TODO
+    // crash_txt caused the program to crash
+    // will continue to look more into it
 
     g.display_grid();
 
@@ -25,6 +32,7 @@ int main(int argc, char* argv[]) {
         std::cout << stack.top().get_row() << "," << stack.top().get_col() << std::endl;
         stack.pop();
     }
+
 
     /* TODO
 

@@ -15,12 +15,18 @@ We need to use -lgraphviz argument when compiling on the command line. */
 #include <sstream>
 #include <fstream>
 #include <iostream>
-#include <cstring>
 #include <string>
 #include <vector>
 #include <graphviz/gvc.h>
+#include <ctime>
 
-// Constructor for a Grid
+// Default Constructor
+Grid::Grid() {
+    this->rows = 0;
+    this->cols = 0;
+}
+
+// Constructor for a Grid with an input file specified by the user
 Grid::Grid(std::string f_name, int r, int c) {
     this->rows = r;
     this->cols = c;
@@ -48,6 +54,34 @@ Grid::Grid(std::string f_name, int r, int c) {
 
     // Call to get_bottom point assigns private variable "bottom_left_point" the proper value
     get_bottom_point();
+}
+
+// Grid constructor for random grid
+Grid::Grid(int rows, int cols) {
+    this->rows = rows;
+    this->cols = cols;
+
+    // Use a seed value of the current time to ensure random number generation
+    // TODO could potentially have the user input a seed
+    std::srand(std::time(nullptr));
+
+    for (int i = 0; i < this->rows; i++) {
+        std::vector<int> temp;
+        for (int j = 0; j < this->cols; j++) {
+            // This gives a 50/50 chance of adding a 0 or a 1
+            if (std::rand() % 100 > 50) {
+                temp.push_back(1);
+            } else {
+                temp.push_back(0);
+            }
+        }
+        // Pushes the vector to the class variable
+        this->grid.push_back(temp);
+    }
+
+    // Get the bottom leftmost point
+    get_bottom_point();
+
 }
 
 // Goes through the grid and adds all the points to the vector except for the bottom leftmost point

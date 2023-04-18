@@ -19,7 +19,9 @@ private:
     bool turn_right(Point p1, Point p2, Point p3);
 
 public:
+    Grid();
     Grid(std::string fname, int rows, int cols);
+    Grid(int rows, int cols);
     void display_grid();
     std::stack<Point> calculate_convex_hull();
 
