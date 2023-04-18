@@ -148,11 +148,15 @@ void Grid::sort_points() {
         positive_slope_points.erase(positive_slope_points.begin() + index);
     }
     // When the vector is size 1 add the last one
-    this->sorted_points.push_back(positive_slope_points[0]);
+    if (positive_slope_points.size() == 1) {
+        this->sorted_points.push_back(positive_slope_points[0]);
+    }
 
     // Add the undefined points
     // The point at the first index will be the outermost point with an undefined slope so that's the only one we need
-    this->sorted_points.push_back(undefined_slope_points[0]);
+    if (!undefined_slope_points.empty()) {
+        this->sorted_points.push_back(undefined_slope_points[0]);
+    }
 
     // Add the lowest negative slopes
     while (negative_slope_points.size() > 1) {
@@ -170,11 +174,9 @@ void Grid::sort_points() {
         negative_slope_points.erase(negative_slope_points.begin() + index);
     }
     // When the vector is size 1 add the last one
-    this->sorted_points.push_back(negative_slope_points[0]);
-
-//    for (int i = 0; i < sorted_points.size(); i++) {
-//        std::cout<<sorted_points[i].slope<<std::endl;
-//    }
+    if (negative_slope_points.size() == 1) {
+        this->sorted_points.push_back(negative_slope_points[0]);
+    }
 }
 
 // Actually calculates which points are part of the convex hull

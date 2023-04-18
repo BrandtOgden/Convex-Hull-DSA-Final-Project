@@ -18,8 +18,8 @@ int main(int argc, char* argv[]) {
     }
 
     // TODO
-    // crash_txt caused the program to crash
-    // will continue to look more into it
+    // Currently doesn't output all of the points when they are directly above bottom_left_point
+    // Don't think we should need all of those points because the line would go through them anyway
 
     g.display_grid();
 
