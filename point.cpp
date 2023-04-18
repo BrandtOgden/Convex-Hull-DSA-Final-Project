@@ -16,7 +16,6 @@ Point::Point(int row, int col) {
 
 // Calculates the slope of the point with the bottom leftmost point
 void Point::calculate_point_slope(Point bot_left_point) {
-
     // Calculates the length of the rise
     float rise;
     // If it is in the same row as bot left point
@@ -36,16 +35,7 @@ void Point::calculate_point_slope(Point bot_left_point) {
         run = bot_left_point.col - this->col;
     }
 
-
     // Calculates the slope
     // If adjacent is 0 then the slope is undefined -inf
     this->slope = rise / run;
-}
-
-int Point::get_row() {
-    return this->row;
-}
-
-int Point::get_col() {
-    return this->col;
 }

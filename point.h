@@ -9,7 +9,6 @@ class Point {
 private:
     int row;
     int col;
-    float slope;
 
     friend class Grid;
 
@@ -17,7 +16,7 @@ public:
     Point();
     Point(int row, int col);
     void calculate_point_slope(Point bot_left_point);
-    int get_row();
-    int get_col();
 
+    float slope;
 };
+
