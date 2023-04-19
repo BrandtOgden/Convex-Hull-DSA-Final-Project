@@ -56,7 +56,7 @@ Grid::Grid(std::string f_name, int r, int c) {
     }
 
     // Call to get_bottom point assigns private variable "bottom_left_point" the proper value
-    get_bottom_point();
+    set_bottom_point();
 }
 
 // Grid constructor for random grid
@@ -83,7 +83,7 @@ Grid::Grid(int rows, int cols) {
     }
 
     // Get the bottom leftmost point
-    get_bottom_point();
+    set_bottom_point();
 
 }
 
@@ -230,7 +230,7 @@ void Grid::sort_points() {
 
 // Actually calculates which points are part of the convex hull
 // Returns them as a vector of points
-std::stack<Point> Grid::calculate_convex_hull() {
+std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
     // Stack to hold the points that are part of the convex hull
     std::stack<Point> convex_hull;
 
@@ -246,6 +246,23 @@ std::stack<Point> Grid::calculate_convex_hull() {
     convex_hull.push(this->sorted_points[0]);
     convex_hull.push(this->sorted_points[1]);
 
+    // bottom left to sorted[0] (always true)
+    add_edge(ss, std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col),
+             std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "green");
+    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
+    // sorted[0] go blue
+    edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
+    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
+    // bottom left to sorted[0] (always true)
+    add_edge(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "green");
+    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
+    // sorted[1] go blue
+    edit_graph(ss, std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "blue");
+    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
     // Loop through until the rest of the points in sorted_points
     for (int i = 2; i < this->sorted_points.size(); i ++) {
         // The point that is on the top of the stack is the point that we are unsure if it is actually
@@ -257,39 +274,68 @@ std::stack<Point> Grid::calculate_convex_hull() {
         if (turn_right(convex_hull.top(), middle_point, this->sorted_points[i])) {
             // The middle point is not part of the convex hull but the point in sorted points is
             convex_hull.push(this->sorted_points[i]);
+
+            // GRAPHING
+            // top to middle (always true)
+            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
+                     std::to_string(middle_point.row) + std::to_string(middle_point.col), "red");
+            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
+            // first sorted point go blue
+            edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
+            render_graph(ss, std::to_string(this->get_graph_count())+".png");
+
+            // middle to sorted[i] (always false)
+            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col),
+                     std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "red");
+            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
+            // reset top to middle
+            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
+                     std::to_string(middle_point.row) + std::to_string(middle_point.col), "white");
+
+            // reset middle to sorted[i]
+            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col),
+                     std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "white");
+
+            // middle point go black
+            edit_graph(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), "black");
+            render_graph(ss, std::to_string(get_graph_count())+".png");
+
+            // sorted[i] go blue
+            edit_graph(ss, std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "blue");
+            render_graph(ss, std::to_string(this->get_graph_count())+".png");
+
         } else {
             // If there is no right turn then the middle point is part of the convex hull
             convex_hull.push(middle_point);
             convex_hull.push(this->sorted_points[i]);
+
+            // top to middle (always true)
+            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
+                     std::to_string(middle_point.row) + std::to_string(middle_point.col), "green");
+            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
+            // top go blue
+            edit_graph(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col), "blue");
+            render_graph(ss, std::to_string(get_graph_count())+".png");
+
+            // middle to sorted[i] (always true)
+            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), std::to_string(this->sorted_points[i].row) + std::to_string(sorted_points[i].col), "green");
+            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
+            // middle point go blue
+            edit_graph(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), "blue");
+            render_graph(ss, std::to_string(get_graph_count())+".png");
         }
     }
+
+    // top to bottom left (always true)
+    add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
+             std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col), "green");
+    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
     return convex_hull;
-}
-
-void Grid::export_graph() {
-    GVC_t *gvc;
-    Agraph_t *g;
-
-    // Initialize the Graphviz context
-    gvc = gvContext();
-
-    // Create a new graph
-    g = agopen("MyGraph", Agdirected, NULL);
-
-    // Add some nodes and edges to the graph
-    Agnode_t *node1 = agnode(g, (char*)"Node 1", true);
-    Agnode_t *node2 = agnode(g, (char*)"Node 2", true);
-    Agnode_t *node3 = agnode(g, (char*)"Node 3", true);
-    Agedge_t *edge1 = agedge(g, node1, node2, (char*)"Edge 1", true);
-    Agedge_t *edge2 = agedge(g, node2, node3, (char*)"Edge 2", true);
-
-    // Generate the DOT output
-    gvLayout(gvc, g, "dot");
-    gvRenderFilename(gvc, g, "png", "myplot.png");
-
-    // Free the graph and context resources
-    agclose(g);
-    gvFreeContext(gvc);
 }
 
 void Grid::display_grid() {
@@ -301,7 +347,7 @@ void Grid::display_grid() {
     }
 }
 
-void Grid::get_bottom_point() {
+void Grid::set_bottom_point() {
     //this method will loop through the grid to find the lowest most left point
     for (int i = this->rows - 1; i >= 0; i--){
         for (int j = 0; j < this->cols; j++){
@@ -313,17 +359,15 @@ void Grid::get_bottom_point() {
     }
 }
 
-
-
 bool Grid::turn_right(Point p1, Point p2, Point p3) {
     //Cross product is a measurement of the two points angle in respect to p1
     //Eliminates the need to calculate slope
     float cross_product = ((p2.row - p1.row) * (p3.col - p1.col)) - ((p2.col - p1.col) * (p3.row - p1.row));
 
     //To determine if p3 is to the right (d -> cross_product):
-        //if (d>0) then C is to the left
-        //if (d=0) then C is on the same line
-        //if (d<0) then C is to the right.
+    //if (d>0) then C is to the left
+    //if (d=0) then C is on the same line
+    //if (d<0) then C is to the right.
 
     //Returns true if dots turn right
     if (cross_product <= 0) {
@@ -335,3 +379,135 @@ bool Grid::turn_right(Point p1, Point p2, Point p3) {
 }
 
 
+
+std::string Grid::base_graph() {
+    std::vector<Point> points = get_all_points();
+    std::stringstream ss;
+
+    // using dot language from graphviz and the libraries to export the graph
+    ss << "digraph {\n\tlayout=dot\n\tsplines=false" << std::endl;
+    // applies global attributes to points and edges
+    ss << "\tnode [shape=point, fixedsize=true, width=0.3, style=filled]\n\tedge [dir=none, penwidth=3]" << std::endl;
+    ss << "\tnodesep=4" << std::endl;  // set the horizontal spacing between nodes
+    ss << "\tranksep=4" << std::endl;  // set the vertical spacing between ranks
+
+    // create a grid of all possible nodes based off the range
+    for (int r = 0; r < this->rows; r++) {
+        for (int c = 0; c < this->cols; c++) {
+            // set the color of the point to white by default
+            //ss << "\t" << std::to_string(r) + std::to_string(c) << " [shape=point,color=white]" << std::endl; TODO TESTING
+            ss << "\t" << std::to_string(r) + std::to_string(c) << " [label=\""+std::to_string(r)+","+std::to_string(c)+"\",color=white]" << std::endl;
+
+            // case for the bottom left point
+            if (r == this->bot_left_point.row && c == this->bot_left_point.col) {
+                //ss << "\t" << std::to_string(r) + std::to_string(c) << " [shape=point,color=black]" << std::endl; TODO TESTING
+                ss << "\t" << std::to_string(r) + std::to_string(c) << " [label=\""+std::to_string(r)+","+std::to_string(c)+"\",color=black]" << std::endl;
+            }
+        }
+    }
+
+    // set the color of the points in the vector to black
+    for (auto &i: points) {
+        //ss << "\t" << std::to_string(i.row) + std::to_string(i.col) << " [shape=point,color=black]" << std::endl; TODO TESTING
+        ss << "\t" << std::to_string(i.row) + std::to_string(i.col) << " [label=\""+std::to_string(i.row)+","+std::to_string(i.col)+"\",color=black]" << std::endl;
+    }
+
+    // create the main edges hat will link the grid together (default white)
+    for (int r = 0; r < this->rows; r++) {
+        ss << "\t{rank=same ";
+        for (int c = 0; c < this->cols; c++) {
+            ss << std::to_string(r) + std::to_string(c) + " ";
+        }
+        ss << "}\n";
+    }
+
+    // create the horizontal edges (default white)
+    for (int r = 0; r < this->rows-1; r++) {
+        for (int c = 0; c < this->cols; c++) {
+            ss << "\t" + std::to_string(r) + std::to_string(c) + " -> " + std::to_string(r+1) + std::to_string(c) + " [style=invis]\n";
+        }
+    }
+    // create the vertical edges (default white)
+    for (int r = 0; r < this->rows; r++) {
+        for (int c = 0; c < this->cols-1; c++) {
+            ss << "\t" + std::to_string(r) + std::to_string(c) + " -> " + std::to_string(r) + std::to_string(c+1) + " [style=invis]\n";
+        }
+    }
+
+    ss << "}";
+
+    return ss.str();
+}
+
+
+bool Grid::edit_graph(std::string& ss, std::string str, std::string color) {
+    std::string search_str;
+    std::string replace_str;
+    if (str.find("->") != std::string::npos) {
+        search_str = str;
+        replace_str = "\t" + str + " [color=" + color + "]";
+    } else  {
+        // the user has entered a point, take the point and create a string to find that ignores the color
+        // and a string with the color we want to place
+        search_str = str + " [label=\"" + str.substr(0,1) + "," + str.substr(1);
+        replace_str = "\t" + str + " [label=\"" + str.substr(0,1) + "," + str.substr(1) + "\",color=" + color + "]";
+    }
+    // perform the find and replace on the string
+    std::stringstream ss_new(ss);
+    std::string line;
+    bool found = false;
+    // iterate over each line in the string and check if the line contains the search_str
+    while (std::getline(ss_new, line)) {
+        if (line.find(search_str) != std::string::npos) {
+            // if so get the starting position of the line and replace the entire line with replace_str
+            // this is so there's no need to worry about the previous color
+            size_t pos = ss.find(line);
+            ss.replace(pos, line.length(), replace_str);
+            found = true;
+        }
+    }
+    return found;
+}
+
+void Grid::add_edge(std::string& ss, std::string p1, std::string p2, std::string color) {
+    // sort points so p1 is smaller and p2 is large for simplicity
+    std::string temp;
+    if (std::stoi(p1) > std::stoi(p2)) {
+        temp = p1;
+        p1 = p2;
+        p2 = temp;
+    }
+    std::cout << p1 << ", " << p2 << std::endl;
+    // Remove the closing brace and new line from the end of the string
+    ss = ss.substr(0, ss.length() - 2);
+    ss += "\n";
+    // add a new edge to the dot file if it doesn't already exist
+    // handles existing horizontal and vertical edges to maintain the grid structure
+    if (!edit_graph(ss, p1 + " -> " + p2, color)) {
+        ss = ss + "\t" + p1 + " -> " + p2 + " [color=" + color + "]";
+    }
+    ss += "\n}";
+}
+
+void Grid::render_graph(std::string& ss, std::string graph_name) {
+    std::cout << graph_name << std::endl;
+    std::cout << ss << std::endl;
+
+    // render the graph to a PNG file
+    GVC_t *gvc = gvContext();
+    Agraph_t *g = agmemread(ss.c_str());
+    gvLayout(gvc, g, "dot");
+    gvRenderFilename(gvc, g, "png", (graph_name).c_str());
+    // Free the graph and context resources
+    agclose(g);
+    gvFreeContext(gvc);
+    this->graph_count++;
+}
+
+int Grid::get_graph_count() {
+    return this->graph_count;
+}
+
+Point &Grid::get_bottom_point() {
+    return bot_left_point;
+}
