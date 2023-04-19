@@ -41,6 +41,11 @@ int main(int argc, char* argv[]) {
 
     std::stack<Point> stack = g.calculate_convex_hull(ss);
 
+    while (!stack.empty()) {
+        std::cout << stack.top().get_row() << "," << stack.top().get_col() << std::endl;
+        stack.pop();
+    }
+
     /* TODO GRAPH TESTING
     g.add_edge(ss, bot_left_row + bot_left_col, "34", "green");
     g.render_graph(ss, std::to_string(g.get_graph_count()) + ".png");

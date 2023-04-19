@@ -255,7 +255,7 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
     edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
     render_graph(ss, std::to_string(get_graph_count()) + ".png");
 
-    // bottom left to sorted[0] (always true)
+    // bottom left to sorted[1] (always true)
     add_edge(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "green");
     render_graph(ss, std::to_string(get_graph_count()) + ".png");
 
@@ -272,18 +272,11 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
         convex_hull.pop();
         // If the point at the top of the stack, the middle point, and the point in sorted points turn right
         if (turn_right(convex_hull.top(), middle_point, this->sorted_points[i])) {
-            // The middle point is not part of the convex hull but the point in sorted points is
-            convex_hull.push(this->sorted_points[i]);
-
             // GRAPHING
             // top to middle (always true)
             add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
                      std::to_string(middle_point.row) + std::to_string(middle_point.col), "red");
             render_graph(ss, std::to_string(get_graph_count()) + ".png");
-
-            // first sorted point go blue
-            edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
-            render_graph(ss, std::to_string(this->get_graph_count())+".png");
 
             // middle to sorted[i] (always false)
             add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col),
@@ -302,15 +295,18 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
             edit_graph(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), "black");
             render_graph(ss, std::to_string(get_graph_count())+".png");
 
+            // Top to sorted[i]
+            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
+                     std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "green");
+            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
             // sorted[i] go blue
             edit_graph(ss, std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "blue");
             render_graph(ss, std::to_string(this->get_graph_count())+".png");
 
-        } else {
-            // If there is no right turn then the middle point is part of the convex hull
-            convex_hull.push(middle_point);
+            // The middle point is not part of the convex hull but the point in sorted points is
             convex_hull.push(this->sorted_points[i]);
-
+        } else {
             // top to middle (always true)
             add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
                      std::to_string(middle_point.row) + std::to_string(middle_point.col), "green");
@@ -327,8 +323,16 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
             // middle point go blue
             edit_graph(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), "blue");
             render_graph(ss, std::to_string(get_graph_count())+".png");
+
+            // If there is no right turn then the middle point is part of the convex hull
+            convex_hull.push(middle_point);
+            convex_hull.push(this->sorted_points[i]);
         }
     }
+
+    // top go blue
+    edit_graph(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col), "blue");
+    render_graph(ss, std::to_string(get_graph_count())+".png");
 
     // top to bottom left (always true)
     add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
