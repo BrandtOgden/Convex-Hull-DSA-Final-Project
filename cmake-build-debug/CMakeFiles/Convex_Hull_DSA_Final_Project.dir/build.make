@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\cmake\win\bin\cmake.exe
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\cmake\win\bin\cmake.exe -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project
+CMAKE_SOURCE_DIR = "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug
+CMAKE_BINARY_DIR = "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Convex_Hull_DSA_Final_Project.dir/depend.make
@@ -70,48 +70,48 @@ include CMakeFiles/Convex_Hull_DSA_Final_Project.dir/flags.make
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/flags.make
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/includes_CXX.rsp
-CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj: C:/Users/ogden/OneDrive/Documents/GitHub/Convex-Hull-DSA-Final-Project/main.cpp
+CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj: C:/Users/brook/Documents/Workspaces/CSC\ 212/DSA\ Project/Convex-Hull-DSA-Final-Project/main.cpp
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj -MF CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.obj.d -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.obj -c C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.obj -MF CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.obj.d -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.obj -c "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\main.cpp"
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.i"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\main.cpp > CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\main.cpp" > CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.i
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Convex_Hull_DSA_Final_Project.dir/main.cpp.s"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\main.cpp -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\main.cpp" -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\main.cpp.s
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/flags.make
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/includes_CXX.rsp
-CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj: C:/Users/ogden/OneDrive/Documents/GitHub/Convex-Hull-DSA-Final-Project/grid.cpp
+CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj: C:/Users/brook/Documents/Workspaces/CSC\ 212/DSA\ Project/Convex-Hull-DSA-Final-Project/grid.cpp
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj -MF CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.obj.d -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.obj -c C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\grid.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.obj -MF CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.obj.d -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.obj -c "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\grid.cpp"
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.i"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\grid.cpp > CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\grid.cpp" > CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.i
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Convex_Hull_DSA_Final_Project.dir/grid.cpp.s"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\grid.cpp -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\grid.cpp" -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\grid.cpp.s
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/flags.make
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/includes_CXX.rsp
-CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj: C:/Users/ogden/OneDrive/Documents/GitHub/Convex-Hull-DSA-Final-Project/point.cpp
+CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj: C:/Users/brook/Documents/Workspaces/CSC\ 212/DSA\ Project/Convex-Hull-DSA-Final-Project/point.cpp
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj -MF CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.obj.d -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.obj -c C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\point.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.obj -MF CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.obj.d -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.obj -c "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\point.cpp"
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.i"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\point.cpp > CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\point.cpp" > CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.i
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Convex_Hull_DSA_Final_Project.dir/point.cpp.s"
-	C:\Users\ogden\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\point.cpp -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\point.cpp" -o CMakeFiles\Convex_Hull_DSA_Final_Project.dir\point.cpp.s
 
 # Object files for target Convex_Hull_DSA_Final_Project
 Convex_Hull_DSA_Final_Project_OBJECTS = \
@@ -129,7 +129,7 @@ Convex_Hull_DSA_Final_Project.exe: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/
 Convex_Hull_DSA_Final_Project.exe: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/linklibs.rsp
 Convex_Hull_DSA_Final_Project.exe: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/objects1.rsp
 Convex_Hull_DSA_Final_Project.exe: CMakeFiles/Convex_Hull_DSA_Final_Project.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Convex_Hull_DSA_Final_Project.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Convex_Hull_DSA_Final_Project.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Convex_Hull_DSA_Final_Project.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -141,6 +141,6 @@ CMakeFiles/Convex_Hull_DSA_Final_Project.dir/clean:
 .PHONY : CMakeFiles/Convex_Hull_DSA_Final_Project.dir/clean
 
 CMakeFiles/Convex_Hull_DSA_Final_Project.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug C:\Users\ogden\OneDrive\Documents\GitHub\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles\Convex_Hull_DSA_Final_Project.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project" "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project" "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug" "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug" "C:\Users\brook\Documents\Workspaces\CSC 212\DSA Project\Convex-Hull-DSA-Final-Project\cmake-build-debug\CMakeFiles\Convex_Hull_DSA_Final_Project.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/Convex_Hull_DSA_Final_Project.dir/depend
 
