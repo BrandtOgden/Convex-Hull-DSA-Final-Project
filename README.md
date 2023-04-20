@@ -2,8 +2,19 @@
 **Ryan Brooks, Ryan Shilling, Sam Gryska, Brandt Ogden**
 
 ## Summary
-Outline of what a convex hull is and Graham's Scan Algorithm  
-Outline of our program and how we went about solving the problem
+A convex hull is a polygon that contains a set of points either on or inside it. It is convex because it will never have
+an internal angle of more than 180 degrees. Our program can read in points through a text file of 0's and 1's, where a 1
+represents a point or there can be completely random points. Our program computes the convex hull using Graham's Scan Algorithm.
+Graham's Scan Algoirhtm is broken up into 3 main steps.
+
+1. Find the bottom leftmost point in the grid
+2. Sort the remaining points based on the angle they make with the bottom leftmost point in the counterclockwise direction
+3. Start from the bottom leftmost point compare it to the first two points in the sorted array of remaining points. If they make a right turn,
+then the middle point is not part of the convex hull. It then moves on to the next point and checks that same condition. This process finishes
+when there are no more sorted points left.
+
+Our program implements this algorithm and provides a visualization of this algorithm finding the convex hull in the form of a GIF.
+
 
 ## Planning 
 Not sure if we need this   
