@@ -1,15 +1,3 @@
-/* TODO - Graphviz notes for report
-must download graphviz
-make sure to check the box to add environment variable when installing graphviz
-
-update your CMAkeLists (may need to adjust file paths and things). Make sure your CMake is compiled using the template from the project then reload it for you.
-main thing is to have your Graphviz install path mapped in the CMakeLists file.
-
-Make sure to include CMakeLists text in report.
-Specifically, the classes from the Graphvz libraries have been noted in the CMakeLists file like so: gvc cgraph
-
-We need to use -lgraphviz argument when compiling on the command line. */
-
 #include "grid.h"
 #include <cmath>
 #include <sstream>
@@ -272,6 +260,7 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
         convex_hull.pop();
         // If the point at the top of the stack, the middle point, and the point in sorted points turn right
         if (turn_right(convex_hull.top(), middle_point, this->sorted_points[i])) {
+
             // GRAPHING
             // top to middle (always true)
             add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
@@ -304,9 +293,12 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
             edit_graph(ss, std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "blue");
             render_graph(ss, std::to_string(this->get_graph_count())+".png");
 
+
             // The middle point is not part of the convex hull but the point in sorted points is
             convex_hull.push(this->sorted_points[i]);
         } else {
+
+            // GRAPHING
             // top to middle (always true)
             add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
                      std::to_string(middle_point.row) + std::to_string(middle_point.col), "green");
@@ -317,12 +309,14 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
             render_graph(ss, std::to_string(get_graph_count())+".png");
 
             // middle to sorted[i] (always true)
-            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), std::to_string(this->sorted_points[i].row) + std::to_string(sorted_points[i].col), "green");
+            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col),
+                     std::to_string(this->sorted_points[i].row) + std::to_string(sorted_points[i].col), "green");
             render_graph(ss, std::to_string(get_graph_count()) + ".png");
 
             // middle point go blue
             edit_graph(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), "blue");
             render_graph(ss, std::to_string(get_graph_count())+".png");
+
 
             // If there is no right turn then the middle point is part of the convex hull
             convex_hull.push(middle_point);
@@ -338,6 +332,7 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
     add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
              std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col), "green");
     render_graph(ss, std::to_string(get_graph_count()) + ".png");
+
 
     return convex_hull;
 }
@@ -390,6 +385,7 @@ std::string Grid::base_graph() {
 
     // using dot language from graphviz and the libraries to export the graph
     ss << "digraph {\n\tlayout=dot\n\tsplines=false" << std::endl;
+
     // applies global attributes to points and edges
     ss << "\tnode [shape=point, fixedsize=true, width=0.3, style=filled]\n\tedge [dir=none, penwidth=3]" << std::endl;
     ss << "\tnodesep=4" << std::endl;  // set the horizontal spacing between nodes
@@ -398,22 +394,21 @@ std::string Grid::base_graph() {
     // create a grid of all possible nodes based off the range
     for (int r = 0; r < this->rows; r++) {
         for (int c = 0; c < this->cols; c++) {
-            // set the color of the point to white by default
-            //ss << "\t" << std::to_string(r) + std::to_string(c) << " [shape=point,color=white]" << std::endl; TODO TESTING
-            ss << "\t" << std::to_string(r) + std::to_string(c) << " [label=\""+std::to_string(r)+","+std::to_string(c)+"\",color=white]" << std::endl;
+            // set the color of the point to white by defaultss << "\t" << std::to_string(r) + std::to_string(c)
+            << " [label=\""+std::to_string(r)+","+std::to_string(c)+"\",color=white]\n";
 
             // case for the bottom left point
             if (r == this->bot_left_point.row && c == this->bot_left_point.col) {
-                //ss << "\t" << std::to_string(r) + std::to_string(c) << " [shape=point,color=black]" << std::endl; TODO TESTING
-                ss << "\t" << std::to_string(r) + std::to_string(c) << " [label=\""+std::to_string(r)+","+std::to_string(c)+"\",color=black]" << std::endl;
+                ss << "\t" << std::to_string(r) + std::to_string(c)
+                << " [label=\""+std::to_string(r)+","+std::to_string(c)+"\",color=black]\n";
             }
         }
     }
 
     // set the color of the points in the vector to black
     for (auto &i: points) {
-        //ss << "\t" << std::to_string(i.row) + std::to_string(i.col) << " [shape=point,color=black]" << std::endl; TODO TESTING
-        ss << "\t" << std::to_string(i.row) + std::to_string(i.col) << " [label=\""+std::to_string(i.row)+","+std::to_string(i.col)+"\",color=black]" << std::endl;
+        ss << "\t" << std::to_string(i.row) + std::to_string(i.col)
+        << " [label=\""+std::to_string(i.row)+","+std::to_string(i.col)+"\",color=black]\n"
     }
 
     // create the main edges hat will link the grid together (default white)
@@ -428,13 +423,15 @@ std::string Grid::base_graph() {
     // create the horizontal edges (default white)
     for (int r = 0; r < this->rows-1; r++) {
         for (int c = 0; c < this->cols; c++) {
-            ss << "\t" + std::to_string(r) + std::to_string(c) + " -> " + std::to_string(r+1) + std::to_string(c) + " [style=invis]\n";
+            ss << "\t" + std::to_string(r) + std::to_string(c) +
+            " -> " + std::to_string(r+1) + std::to_string(c) + " [style=invis]\n";
         }
     }
     // create the vertical edges (default white)
     for (int r = 0; r < this->rows; r++) {
         for (int c = 0; c < this->cols-1; c++) {
-            ss << "\t" + std::to_string(r) + std::to_string(c) + " -> " + std::to_string(r) + std::to_string(c+1) + " [style=invis]\n";
+            ss << "\t" + std::to_string(r) + std::to_string(c) +
+            " -> " + std::to_string(r) + std::to_string(c+1) + " [style=invis]\n";
         }
     }
 
