@@ -19,10 +19,6 @@ int main(int argc, char* argv[]) {
         g = Grid(f_name, row, col);
     }
 
-    // TODO
-    // Currently doesn't output all of the points when they are directly above bottom_left_point
-    // Don't think we should need all of those points because the line would go through them anyway
-    // Only want to add the outermost when the slopes are equal
     g.display_grid();
 
     // GRAPHING
@@ -39,6 +35,9 @@ int main(int argc, char* argv[]) {
     g.render_graph(ss, g.graph_name());
 
     std::stack<Point> stack = g.calculate_convex_hull(ss);
+    // TODO
+    // If the stack is empty there is no convex hull
+    // Talk to Ryan about how this affects graphics
 
     while (!stack.empty()) {
         std::cout << stack.top().get_row() << "," << stack.top().get_col() << std::endl;
@@ -46,5 +45,5 @@ int main(int argc, char* argv[]) {
     }
 
     // create the gif
-    g.generate_gif();
+    //g.generate_gif();
 }

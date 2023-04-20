@@ -56,7 +56,6 @@ Grid::Grid(int rows, int cols) {
     this->cols = cols;
 
     // Use a seed value of the current time to ensure random number generation
-    // TODO could potentially have the user input a seed
     std::srand(std::time(nullptr));
 
     for (int i = 0; i < this->rows; i++) {
@@ -82,33 +81,7 @@ Grid::Grid(int rows, int cols) {
 std::vector<Point> Grid::get_all_points() {
 
     std::vector<Point> points;
-
-    /*
-
-    // Loop through the points in a circular manner starting at the outside
-    // This is so that the points that are furthest to the outside are added first
-    // and if they have the same slope with other points inside then they are not added
-
-    int iteration = 0;
-
-    while (iteration != (this->rows / 2) + 1) {
-        for (int row = iteration; row < this->rows-iteration; row++) {
-            for (int col = iteration; col < this->cols-iteration; col++) {
-                if (this->grid[row][col] == 1 && (row == iteration || row == this->rows - iteration - 1)
-                && (this->bot_left_point.row != row || this->bot_left_point.col != col)) {
-                    points.push_back(Point(row, col));
-                } else if (this->grid[row][col] == 1 && (col == iteration || col == this->cols - iteration - 1)
-                && (this->bot_left_point.row != row || this->bot_left_point.col != col)) {
-                    points.push_back(Point(row, col));
-                }
-            }
-        }
-        iteration++;
-    }
-
-     */
-
-
+    
     // Loop through the grid starting from the right
     for (int row = 0; row < this->grid.size(); row++) {
         for (int col = this->grid[row].size(); col >= 0; col--) {
@@ -173,11 +146,6 @@ void Grid::sort_points() {
             this->sorted_points.push_back(min_point);
             // Add its slope to the slopes set
             slopes.insert(min_point.slope);
-        } else {
-            // If a point with the same slope has already been added
-            //int index_found = distance(slopes.begin(), pos_found);
-            // Add the point that is in the outermost position or has the greatest row
-            //if (min_point.row > *pos_found)
         }
         // Remove it from the vector
         positive_slope_points.erase(positive_slope_points.begin() + index);
@@ -228,113 +196,119 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
     // Sort all the points based on the angle they make with the bottom leftmost point
     this->sort_points();
 
-    // TODO
     // If the size of sorted_points is 1 or there are two total points then a convex hull is not possible
-
-    // The bottom left point is part of the convex hull
-    convex_hull.push(this->bot_left_point);
-    // The first two points in the sorted array are part of the convex hull
-    convex_hull.push(this->sorted_points[0]);
-    convex_hull.push(this->sorted_points[1]);
-
-    // bottom left to sorted[0] (always true)
-    add_edge(ss, std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col),
-             std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "green");
-    render_graph(ss, graph_name());
-
-    // sorted[0] go blue
-    edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
-    render_graph(ss, graph_name());
-
-    // bottom left to sorted[1] (always true)
-    add_edge(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col),
-             std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "green");
-    render_graph(ss, graph_name());
-
-    // sorted[1] go blue
-    edit_graph(ss, std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "blue");
-    render_graph(ss, graph_name());
-
-    // Loop through until the rest of the points in sorted_points
-    for (int i = 2; i < this->sorted_points.size(); i ++) {
-        // The point that is on the top of the stack is the point that we are unsure if it is actually
-        // part of the convex hull
-        Point middle_point = convex_hull.top();
-        // Remove that point from the stack for now
-        convex_hull.pop();
-        // If the point at the top of the stack, the middle point, and the point in sorted points turn right
-
-        // shorthand strings for all the points we need to make the graph
-        std::string top_point = std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col);
-        std::string mid_point = std::to_string(middle_point.row) + std::to_string(middle_point.col);
-        std::string sorted_point = std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col);
-
-        if (turn_right(convex_hull.top(), middle_point, this->sorted_points[i])) {
-
-            // start drawing edges to create the convex hull
-            // top to middle (always false)
-            add_edge(ss, top_point, mid_point, "red");
-            render_graph(ss, graph_name());
-            render_graph(ss, graph_name());
-
-            // middle to sorted[i] (always false)
-            add_edge(ss, mid_point, sorted_point, "red");
-            render_graph(ss, graph_name());
-            render_graph(ss, graph_name());
-
-            // reset top to middle
-            add_edge(ss, top_point, mid_point, "white");
-
-            // reset middle to sorted[i]
-            add_edge(ss, mid_point, sorted_point, "white");
-
-            // middle point go black
-            edit_graph(ss, mid_point, "black");
-            render_graph(ss, graph_name());
-
-            // Top to sorted[i]
-            add_edge(ss, top_point, sorted_point, "green");
-            render_graph(ss, graph_name());
-
-            // sorted[i] go blue
-            edit_graph(ss, sorted_point, "blue");
-            render_graph(ss, graph_name());
-
-
-            // The middle point is not part of the convex hull but the point in sorted points is
-            convex_hull.push(this->sorted_points[i]);
-        } else {
-            // top to middle (always true)
-            add_edge(ss, top_point, mid_point, "green");
-            render_graph(ss, graph_name());
-
-            // top go blue
-            edit_graph(ss, top_point, "blue");
-            render_graph(ss, graph_name());
-
-            // middle to sorted[i] (always true)
-            add_edge(ss, mid_point, sorted_point, "green");
-            render_graph(ss, graph_name());
-
-            // middle point go blue
-            edit_graph(ss, mid_point, "blue");
-            render_graph(ss, graph_name());
-
-
-            // If there is no right turn then the middle point is part of the convex hull
-            convex_hull.push(middle_point);
-            convex_hull.push(this->sorted_points[i]);
-        }
+    bool cont = true;
+    if (this->sorted_points.empty() || this->sorted_points.size() == 1) {
+        cont = false;
     }
 
-    // top go blue
-    edit_graph(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col), "blue");
-    render_graph(ss, graph_name());
+    if (cont) {
+        // The bottom left point is part of the convex hull
+        convex_hull.push(this->bot_left_point);
+        // The first two points in the sorted array are part of the convex hull
+        convex_hull.push(this->sorted_points[0]);
+        convex_hull.push(this->sorted_points[1]);
 
-    // top to bottom left (always true)
-    add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
-             std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col), "green");
-    render_graph(ss,"last_frame.jpg");
+        // bottom left to sorted[0] (always true)
+        add_edge(ss, std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col),
+                 std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "green");
+        render_graph(ss, graph_name());
+
+        // sorted[0] go blue
+        edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
+        render_graph(ss, graph_name());
+
+        // bottom left to sorted[1] (always true)
+        add_edge(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col),
+                 std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "green");
+        render_graph(ss, graph_name());
+
+        // sorted[1] go blue
+        edit_graph(ss, std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "blue");
+        render_graph(ss, graph_name());
+
+        // Loop through until the rest of the points in sorted_points
+        for (int i = 2; i < this->sorted_points.size(); i++) {
+            // The point that is on the top of the stack is the point that we are unsure if it is actually
+            // part of the convex hull
+            Point middle_point = convex_hull.top();
+            // Remove that point from the stack for now
+            convex_hull.pop();
+            // If the point at the top of the stack, the middle point, and the point in sorted points turn right
+
+            // shorthand strings for all the points we need to make the graph
+            std::string top_point = std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col);
+            std::string mid_point = std::to_string(middle_point.row) + std::to_string(middle_point.col);
+            std::string sorted_point =
+                    std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col);
+
+            if (turn_right(convex_hull.top(), middle_point, this->sorted_points[i])) {
+
+                // start drawing edges to create the convex hull
+                // top to middle (always false)
+                add_edge(ss, top_point, mid_point, "red");
+                render_graph(ss, graph_name());
+                render_graph(ss, graph_name());
+
+                // middle to sorted[i] (always false)
+                add_edge(ss, mid_point, sorted_point, "red");
+                render_graph(ss, graph_name());
+                render_graph(ss, graph_name());
+
+                // reset top to middle
+                add_edge(ss, top_point, mid_point, "white");
+
+                // reset middle to sorted[i]
+                add_edge(ss, mid_point, sorted_point, "white");
+
+                // middle point go black
+                edit_graph(ss, mid_point, "black");
+                render_graph(ss, graph_name());
+
+                // Top to sorted[i]
+                add_edge(ss, top_point, sorted_point, "green");
+                render_graph(ss, graph_name());
+
+                // sorted[i] go blue
+                edit_graph(ss, sorted_point, "blue");
+                render_graph(ss, graph_name());
+
+
+                // The middle point is not part of the convex hull but the point in sorted points is
+                convex_hull.push(this->sorted_points[i]);
+            } else {
+                // top to middle (always true)
+                add_edge(ss, top_point, mid_point, "green");
+                render_graph(ss, graph_name());
+
+                // top go blue
+                edit_graph(ss, top_point, "blue");
+                render_graph(ss, graph_name());
+
+                // middle to sorted[i] (always true)
+                add_edge(ss, mid_point, sorted_point, "green");
+                render_graph(ss, graph_name());
+
+                // middle point go blue
+                edit_graph(ss, mid_point, "blue");
+                render_graph(ss, graph_name());
+
+
+                // If there is no right turn then the middle point is part of the convex hull
+                convex_hull.push(middle_point);
+                convex_hull.push(this->sorted_points[i]);
+            }
+        }
+
+        // top go blue
+        edit_graph(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col), "blue");
+        render_graph(ss, graph_name());
+
+        // top to bottom left (always true)
+        add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
+                 std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col), "green");
+        render_graph(ss, "last_frame.jpg");
+    }
 
     return convex_hull;
 }
