@@ -28,22 +28,15 @@ public:
     Point &get_bottom_point();
 
     void display_grid();
-    std::stack<Point> calculate_convex_hull();
+    std::stack<Point> calculate_convex_hull(std::string ss);
 
-    void TEST() {
-        std::vector<Point> all_points = get_all_points();
-        for (int i = 0; i < all_points.size(); i++) {
-            std::cout << all_points[i].row << "," << all_points[i].col << std::endl;
-        }
-    }
-
+    // Helper methods for graphing the convex hull
     std::string base_graph();
 
     bool edit_graph(std::string &ss, std::string str, std::string color);
     void add_edge(std::string &ss, std::string p1, std::string p2, std::string color);
     void render_graph(std::string &ss, std::string graph_name);
+    void generate_gif();
 
-    int get_graph_count();
-
-    std::stack<Point> calculate_convex_hull(std::string ss);
+    std::string graph_name();
 };

@@ -9,6 +9,9 @@
 #include <ctime>
 #include <algorithm>
 #include <set>
+#include <unistd.h>
+#include <cstdlib>
+#include <iomanip>
 
 // Default Constructor
 Grid::Grid() {
@@ -237,19 +240,20 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
     // bottom left to sorted[0] (always true)
     add_edge(ss, std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col),
              std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "green");
-    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+    render_graph(ss, graph_name());
 
     // sorted[0] go blue
     edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
-    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+    render_graph(ss, graph_name());
 
     // bottom left to sorted[1] (always true)
-    add_edge(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "green");
-    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+    add_edge(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col),
+             std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "green");
+    render_graph(ss, graph_name());
 
     // sorted[1] go blue
     edit_graph(ss, std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "blue");
-    render_graph(ss, std::to_string(get_graph_count()) + ".png");
+    render_graph(ss, graph_name());
 
     // Loop through until the rest of the points in sorted_points
     for (int i = 2; i < this->sorted_points.size(); i ++) {
@@ -259,63 +263,62 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
         // Remove that point from the stack for now
         convex_hull.pop();
         // If the point at the top of the stack, the middle point, and the point in sorted points turn right
+
+        // shorthand strings for all the points we need to make the graph
+        std::string top_point = std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col);
+        std::string mid_point = std::to_string(middle_point.row) + std::to_string(middle_point.col);
+        std::string sorted_point = std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col);
+
         if (turn_right(convex_hull.top(), middle_point, this->sorted_points[i])) {
 
-            // GRAPHING
-            // top to middle (always true)
-            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
-                     std::to_string(middle_point.row) + std::to_string(middle_point.col), "red");
-            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+            // start drawing edges to create the convex hull
+            // top to middle (always false)
+            add_edge(ss, top_point, mid_point, "red");
+            render_graph(ss, graph_name());
+            render_graph(ss, graph_name());
 
             // middle to sorted[i] (always false)
-            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col),
-                     std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "red");
-            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+            add_edge(ss, mid_point, sorted_point, "red");
+            render_graph(ss, graph_name());
+            render_graph(ss, graph_name());
 
             // reset top to middle
-            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
-                     std::to_string(middle_point.row) + std::to_string(middle_point.col), "white");
+            add_edge(ss, top_point, mid_point, "white");
 
             // reset middle to sorted[i]
-            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col),
-                     std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "white");
+            add_edge(ss, mid_point, sorted_point, "white");
 
             // middle point go black
-            edit_graph(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), "black");
-            render_graph(ss, std::to_string(get_graph_count())+".png");
+            edit_graph(ss, mid_point, "black");
+            render_graph(ss, graph_name());
 
             // Top to sorted[i]
-            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
-                     std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "green");
-            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+            add_edge(ss, top_point, sorted_point, "green");
+            render_graph(ss, graph_name());
 
             // sorted[i] go blue
-            edit_graph(ss, std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col), "blue");
-            render_graph(ss, std::to_string(this->get_graph_count())+".png");
+            edit_graph(ss, sorted_point, "blue");
+            render_graph(ss, graph_name());
 
 
             // The middle point is not part of the convex hull but the point in sorted points is
             convex_hull.push(this->sorted_points[i]);
         } else {
-
-            // GRAPHING
             // top to middle (always true)
-            add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
-                     std::to_string(middle_point.row) + std::to_string(middle_point.col), "green");
-            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+            add_edge(ss, top_point, mid_point, "green");
+            render_graph(ss, graph_name());
 
             // top go blue
-            edit_graph(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col), "blue");
-            render_graph(ss, std::to_string(get_graph_count())+".png");
+            edit_graph(ss, top_point, "blue");
+            render_graph(ss, graph_name());
 
             // middle to sorted[i] (always true)
-            add_edge(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col),
-                     std::to_string(this->sorted_points[i].row) + std::to_string(sorted_points[i].col), "green");
-            render_graph(ss, std::to_string(get_graph_count()) + ".png");
+            add_edge(ss, mid_point, sorted_point, "green");
+            render_graph(ss, graph_name());
 
             // middle point go blue
-            edit_graph(ss, std::to_string(middle_point.row) + std::to_string(middle_point.col), "blue");
-            render_graph(ss, std::to_string(get_graph_count())+".png");
+            edit_graph(ss, mid_point, "blue");
+            render_graph(ss, graph_name());
 
 
             // If there is no right turn then the middle point is part of the convex hull
@@ -326,13 +329,12 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
 
     // top go blue
     edit_graph(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col), "blue");
-    render_graph(ss, std::to_string(get_graph_count())+".png");
+    render_graph(ss, graph_name());
 
     // top to bottom left (always true)
     add_edge(ss, std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col),
              std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col), "green");
-    render_graph(ss, std::to_string(get_graph_count()) + ".png");
-
+    render_graph(ss,"last_frame.jpg");
 
     return convex_hull;
 }
@@ -377,8 +379,6 @@ bool Grid::turn_right(Point p1, Point p2, Point p3) {
     }
 }
 
-
-
 std::string Grid::base_graph() {
     std::vector<Point> points = get_all_points();
     std::stringstream ss;
@@ -394,7 +394,8 @@ std::string Grid::base_graph() {
     // create a grid of all possible nodes based off the range
     for (int r = 0; r < this->rows; r++) {
         for (int c = 0; c < this->cols; c++) {
-            // set the color of the point to white by defaultss << "\t" << std::to_string(r) + std::to_string(c)
+            // set the color of the point to white by default
+            ss << "\t" << std::to_string(r) + std::to_string(c)
             << " [label=\""+std::to_string(r)+","+std::to_string(c)+"\",color=white]\n";
 
             // case for the bottom left point
@@ -408,7 +409,7 @@ std::string Grid::base_graph() {
     // set the color of the points in the vector to black
     for (auto &i: points) {
         ss << "\t" << std::to_string(i.row) + std::to_string(i.col)
-        << " [label=\""+std::to_string(i.row)+","+std::to_string(i.col)+"\",color=black]\n"
+        << " [label=\""+std::to_string(i.row)+","+std::to_string(i.col)+"\",color=black]\n";
     }
 
     // create the main edges hat will link the grid together (default white)
@@ -491,24 +492,38 @@ void Grid::add_edge(std::string& ss, std::string p1, std::string p2, std::string
 }
 
 void Grid::render_graph(std::string& ss, std::string graph_name) {
-    std::cout << graph_name << std::endl;
-    std::cout << ss << std::endl;
+    //std::cout << graph_name << std::endl;
+    //std::cout << ss << std::endl;
 
-    // render the graph to a PNG file
+    // render the graph to a JPG file
     GVC_t *gvc = gvContext();
     Agraph_t *g = agmemread(ss.c_str());
     gvLayout(gvc, g, "dot");
-    gvRenderFilename(gvc, g, "png", (graph_name).c_str());
+    gvRenderFilename(gvc, g, "jpg", (graph_name).c_str());
     // Free the graph and context resources
     agclose(g);
     gvFreeContext(gvc);
     this->graph_count++;
 }
 
-int Grid::get_graph_count() {
-    return this->graph_count;
+std::string Grid::graph_name() {
+    // takes the current count of the graph to name the file to
+    // makes an output file stream to be computable with setfill
+    // adds leading 0 to numbers 1-9, so it orders to graph files correctly
+    std::ostringstream oss;
+    oss << std::setfill('0') << std::setw(2) << std::to_string(this->graph_count);
+    std::string str = oss.str() + ".jpg";
+    return str;
 }
 
 Point &Grid::get_bottom_point() {
     return bot_left_point;
+}
+
+void Grid::generate_gif() {
+    // execute a system command to use the Image Magic API to convert the frames to a gif with 40 milliseconds
+    // in between and a delay for 300 milliseconds for the last frame
+    system("convert -delay 40 -dispose previous -loop 0 *.jpg -delay 200 last_frame.jpg graph.gif");
+    // execute a system command to open the graph for easy access
+    system("start graph.gif");
 }

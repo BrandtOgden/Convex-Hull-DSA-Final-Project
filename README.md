@@ -20,7 +20,7 @@ Since we're using the Dot Language provided by Graphviz, you will need to instal
 
 If you're using CLion to compile the program, make sure you:
 1. Install Graphviz on your computer https://graphviz.org/download/ Make sure when installing to check the box "Add Graphviz to the system PATH", as seen in the picture below.
-   ![graphvizinstallpicture.png](graphvizinstallpicture.png)
+   ![graphvizinstallpicture.jpg](graphvizinstallpicture.png)
 2. It's recommended you restart your computer
 3. If you're compiling on the command line then use this command below. If you're using CLion, please proceed with steps 4 and 5.
 ```
