@@ -196,13 +196,8 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
     // Sort all the points based on the angle they make with the bottom leftmost point
     this->sort_points();
 
-    // If the size of sorted_points is 1 or there are two total points then a convex hull is not possible
-    bool cont = true;
-    if (this->sorted_points.empty() || this->sorted_points.size() == 1) {
-        cont = false;
-    }
-
-    if (cont) {
+    // Main part of convex hull algorithm
+    if (!(this->sorted_points.empty() || this->sorted_points.size() == 1)) {
         // The bottom left point is part of the convex hull
         convex_hull.push(this->bot_left_point);
         // The first two points in the sorted array are part of the convex hull
