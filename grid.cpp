@@ -201,10 +201,8 @@ void Grid::sort_points() {
 std::stack<Point> Grid::calculate_convex_hull() {
     // Stack to hold the points that are part of the convex hull
     std::stack<Point> convex_hull;
-
     // Sort all the points based on the angle they make with the bottom leftmost point
     this->sort_points();
-
     // TODO
     // If the size of sorted_points is 1 or there are two total points then a convex hull is not possible
 
