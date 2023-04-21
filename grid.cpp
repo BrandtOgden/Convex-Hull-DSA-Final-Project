@@ -194,8 +194,6 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
     std::stack<Point> convex_hull;
     // Sort all the points based on the angle they make with the bottom leftmost point
     this->sort_points();
-    // TODO
-    // If the size of sorted_points is 1 or there are two total points then a convex hull is not possible
 
     // Main part of convex hull algorithm
     if (!(this->sorted_points.empty() || this->sorted_points.size() == 1)) {
@@ -261,10 +259,8 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
                 edit_graph(ss, mid_point, "black");
                 render_graph(ss, graph_name());
 
-
-                // The middle point is not part of the convex hull but the point in sorted points is
                 // If sorted_points[i] doesn't also make a right turn then add it
-                if (i != this->sorted_points.size() && !turn_right(convex_hull.top(), this->sorted_points[i], this->sorted_points[i+1])) {
+                if (i != this->sorted_points.size()-1 && !turn_right(convex_hull.top(), this->sorted_points[i], this->sorted_points[i+1])) {
                     // Top to sorted[i]
                     add_edge(ss, top_point, sorted_point, "green");
                     render_graph(ss, graph_name());
@@ -527,7 +523,7 @@ void Grid::generate_gif() {
     system("convert -delay 40 -dispose previous -loop 0 frames/*.jpg -delay 200 frames/last_frame.jpg frames/graph.gif");
     // execute a system command to open the graph for easy access
 
-    std::cout << " g" << std::endl;
+    std::cout << "Done" << std::endl;
 
     system("start frames/graph.gif");
 }
