@@ -260,7 +260,7 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
                 render_graph(ss, graph_name());
 
                 // If sorted_points[i] doesn't also make a right turn then add it
-                if (i != this->sorted_points.size()-1 && !turn_right(convex_hull.top(), this->sorted_points[i], this->sorted_points[i+1])) {
+                if (i != this->sorted_points.size()-2 && !turn_right(convex_hull.top(), this->sorted_points[i], this->sorted_points[i+1])) {
                     // Top to sorted[i]
                     add_edge(ss, top_point, sorted_point, "green");
                     render_graph(ss, graph_name());
