@@ -312,12 +312,12 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
                 edit_graph(ss, top_point, "blue");
                 render_graph(ss, graph_name());
 
-                // middle to sorted[i] (always true)
-                add_edge(ss, mid_point, sorted_point, "green");
-                render_graph(ss, graph_name());
-
                 // middle point go blue
                 edit_graph(ss, mid_point, "blue");
+                render_graph(ss, graph_name());
+
+                // middle to sorted[i] (always true)
+                add_edge(ss, mid_point, sorted_point, "green");
                 render_graph(ss, graph_name());
 
 
