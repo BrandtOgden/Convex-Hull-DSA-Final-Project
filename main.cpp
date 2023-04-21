@@ -38,15 +38,18 @@ int main(int argc, char* argv[]) {
     g.render_graph(ss, g.graph_name());
 
     std::stack<Point> stack = g.calculate_convex_hull(ss);
-    // TODO
-    // If the stack is empty there is no convex hull
-    // Talk to Ryan about how this affects graphics
 
+    if (!stack.empty()) {
+        // create the gif
+        g.generate_gif();
+    } else {
+        std::cout << "ERROR THIS INPUT COULD NOT CREATE A CONVEX HULL BECAUSE THERE AREN'T ENOUGH POINTS" << std::endl;
+    }
+
+    // Outputs the points to the terminal
     while (!stack.empty()) {
         std::cout << stack.top().get_row() << "," << stack.top().get_col() << std::endl;
         stack.pop();
     }
 
-    // create the gif
-    g.generate_gif();
 }
