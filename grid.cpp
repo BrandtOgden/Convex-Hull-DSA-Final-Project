@@ -261,17 +261,48 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
                 edit_graph(ss, mid_point, "black");
                 render_graph(ss, graph_name());
 
-                // Top to sorted[i]
-                add_edge(ss, top_point, sorted_point, "green");
-                render_graph(ss, graph_name());
-
-                // sorted[i] go blue
-                edit_graph(ss, sorted_point, "blue");
-                render_graph(ss, graph_name());
-
 
                 // The middle point is not part of the convex hull but the point in sorted points is
-                convex_hull.push(this->sorted_points[i]);
+                // If sorted_points[i] doesn't also make a right turn then add it
+                if (i != this->sorted_points.size() && !turn_right(convex_hull.top(), this->sorted_points[i], this->sorted_points[i+1])) {
+                    // Top to sorted[i]
+                    add_edge(ss, top_point, sorted_point, "green");
+                    render_graph(ss, graph_name());
+
+                    // sorted[i] go blue
+                    edit_graph(ss, sorted_point, "blue");
+                    render_graph(ss, graph_name());
+                    convex_hull.push(this->sorted_points[i]);
+                } else {
+                    // Update graphics to show sorted_points[i] getting removed
+                    // It's not really removed we just don't add it, but we still need to show that visually
+
+                    // Strings to clean up graphics calls
+                    top_point = std::to_string(convex_hull.top().row) + std::to_string(convex_hull.top().col);
+                    std::string sorted_point_i =
+                            std::to_string(this->sorted_points[i].row) + std::to_string(this->sorted_points[i].col);
+                    std::string sorted_point_i_1 = std::to_string(this->sorted_points[i+1].row) + std::to_string(this->sorted_points[i+1].col);
+
+                    // top to sorted[i] (always false)
+                    add_edge(ss, top_point, sorted_point_i, "red");
+                    render_graph(ss, graph_name());
+                    render_graph(ss, graph_name());
+
+                    // sorted[i] to sorted[i+1] (always false)
+                    add_edge(ss, sorted_point_i, sorted_point_i_1, "red");
+                    render_graph(ss, graph_name());
+                    render_graph(ss, graph_name());
+
+                    // reset top to sorted[i]
+                    add_edge(ss, top_point, sorted_point_i, "white");
+
+                    // reset sorted[i] to sorted[i+1]
+                    add_edge(ss, sorted_point_i, sorted_point_i_1, "white");
+
+                    // sorted[i] go black
+                    edit_graph(ss, sorted_point_i, "black");
+                    render_graph(ss, graph_name());
+                }
             } else {
                 // top to middle (always true)
                 add_edge(ss, top_point, mid_point, "green");
