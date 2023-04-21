@@ -341,7 +341,7 @@ bool Grid::turn_right(Point p1, Point p2, Point p3) {
     //if (d<0) then C is to the right.
 
     //Returns true if dots turn right
-    if (cross_product <= 0) {
+    if (cross_product < 0) {
         return true;
     }
     else {
@@ -417,7 +417,7 @@ bool Grid::edit_graph(std::string& ss, std::string str, std::string color) {
     std::string replace_str;
     if (str.find("->") != std::string::npos) {
         search_str = str;
-        replace_str = "\t" + str + " [color=" + color + "]";
+        replace_str = "\t" + str + " [color=" + color + ",constraint=false]";
     } else  {
         // the user has entered a point, take the point and create a string to find that ignores the color
         // and a string with the color we want to place
@@ -449,14 +449,14 @@ void Grid::add_edge(std::string& ss, std::string p1, std::string p2, std::string
         p1 = p2;
         p2 = temp;
     }
-    std::cout << p1 << ", " << p2 << std::endl;
+
     // Remove the closing brace and new line from the end of the string
-    ss = ss.substr(0, ss.length() - 2);
-    ss += "\n";
+    ss = ss.substr(0, ss.length() - 2) +"\n";
+
     // add a new edge to the dot file if it doesn't already exist
     // handles existing horizontal and vertical edges to maintain the grid structure
     if (!edit_graph(ss, p1 + " -> " + p2, color)) {
-        ss = ss + "\t" + p1 + " -> " + p2 + " [color=" + color + "]";
+        ss = ss + "\t" + p1 + " -> " + p2 + " [color=" + color + ",constraint=false]";
     }
     ss += "\n}";
 }
@@ -469,7 +469,7 @@ void Grid::render_graph(std::string& ss, std::string graph_name) {
     GVC_t *gvc = gvContext();
     Agraph_t *g = agmemread(ss.c_str());
     gvLayout(gvc, g, "dot");
-    gvRenderFilename(gvc, g, "jpg", (graph_name).c_str());
+    gvRenderFilename(gvc, g, "jpg", ("frames/" + graph_name).c_str());
     // Free the graph and context resources
     agclose(g);
     gvFreeContext(gvc);
@@ -493,7 +493,10 @@ Point &Grid::get_bottom_point() {
 void Grid::generate_gif() {
     // execute a system command to use the Image Magic API to convert the frames to a gif with 40 milliseconds
     // in between and a delay for 300 milliseconds for the last frame
-    system("convert -delay 40 -dispose previous -loop 0 *.jpg -delay 200 last_frame.jpg graph.gif");
+    system("convert -delay 40 -dispose previous -loop 0 frames/*.jpg -delay 200 frames/last_frame.jpg frames/graph.gif");
     // execute a system command to open the graph for easy access
-    system("start graph.gif");
+
+    std::cout << " g" << std::endl;
+
+    system("start frames/graph.gif");
 }

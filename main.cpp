@@ -7,6 +7,9 @@
 #include <vector>
 
 int main(int argc, char* argv[]) {
+    // delete the jpgs from the last run
+    system("for %i in (frames\\*.jpg) do del \"%i\"");
+
     std::string f_name = argv[1];
     int row = std::stoi(argv[2]);
     int col = std::stoi(argv[3]);
@@ -45,5 +48,5 @@ int main(int argc, char* argv[]) {
     }
 
     // create the gif
-    //g.generate_gif();
+    g.generate_gif();
 }
