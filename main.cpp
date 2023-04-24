@@ -14,21 +14,11 @@ int main(int argc, char* argv[]) {
     int row = std::stoi(argv[2]);
     int col = std::stoi(argv[3]);
 
-    Grid g;
-    // If the file name is "random" then use the random grid constructor
-    if (f_name == "random") {
-        g = Grid(row, col);
+    Grid g = Grid(f_name, row, col);
 
-        // Display the grid on the console
-        std::cout << "Random Grid:" << std::endl;
-        g.display_grid();
-    } else {
-        g = Grid(f_name, row, col);
-
-        // Display grid on console
-        std::cout << f_name << " Grid:" << std::endl;
-        g.display_grid();
-    }
+    // Display grid on console
+    std::cout << f_name << " Grid:" << std::endl;
+    g.display_grid();
 
     // GRAPHING
     // generate a grid then add the basic polygon to it
@@ -54,11 +44,4 @@ int main(int argc, char* argv[]) {
     } else {
         std::cout << "ERROR THIS INPUT COULD NOT CREATE A CONVEX HULL BECAUSE THERE AREN'T ENOUGH POINTS" << std::endl;
     }
-
-    // Outputs the points to the terminal
-    //while (!stack.empty()) {
-    //    std::cout << stack.top().get_row() << "," << stack.top().get_col() << std::endl;
-    //    stack.pop();
-    //}
-
 }

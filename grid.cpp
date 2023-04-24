@@ -50,33 +50,6 @@ Grid::Grid(std::string f_name, int r, int c) {
     set_bottom_point();
 }
 
-// Grid constructor for random grid
-Grid::Grid(int rows, int cols) {
-    this->rows = rows;
-    this->cols = cols;
-
-    // Use a seed value of the current time to ensure random number generation
-    std::srand(std::time(nullptr));
-
-    for (int i = 0; i < this->rows; i++) {
-        std::vector<int> temp;
-        for (int j = 0; j < this->cols; j++) {
-            // This gives a 50/50 chance of adding a 0 or a 1
-            if (std::rand() % 100 > 50) {
-                temp.push_back(1);
-            } else {
-                temp.push_back(0);
-            }
-        }
-        // Pushes the vector to the class variable
-        this->grid.push_back(temp);
-    }
-
-    // Get the bottom leftmost point
-    set_bottom_point();
-
-}
-
 // Goes through the grid and adds all the points to the vector except for the bottom leftmost point
 std::vector<Point> Grid::get_all_points() {
 
@@ -91,7 +64,6 @@ std::vector<Point> Grid::get_all_points() {
             }
         }
     }
-
     return points;
 }
 
@@ -332,7 +304,6 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
                  std::to_string(bot_left_point.row) + std::to_string(bot_left_point.col), "green");
         render_graph(ss, "last_frame.jpg");
     }
-
     return convex_hull;
 }
 
@@ -489,9 +460,6 @@ void Grid::add_edge(std::string& ss, std::string p1, std::string p2, std::string
 }
 
 void Grid::render_graph(std::string& ss, std::string graph_name) {
-    //std::cout << graph_name << std::endl;
-    //std::cout << ss << std::endl;
-
     // render the graph to a JPG file
     GVC_t *gvc = gvContext();
     Agraph_t *g = agmemread(ss.c_str());

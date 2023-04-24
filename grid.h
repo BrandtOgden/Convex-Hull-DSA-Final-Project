@@ -24,7 +24,6 @@ private:
 public:
     Grid();
     Grid(std::string fname, int rows, int cols);
-    Grid(int rows, int cols);
     Point &get_bottom_point();
 
     void display_grid();
