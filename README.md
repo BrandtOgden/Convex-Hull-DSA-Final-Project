@@ -50,12 +50,14 @@ Note that in the "set(GRAPHVIZ_INCLUDE_DIRS..." lines you will need to change th
 6. Reload the CMake project
 
 ### Input Text Files
-There are already INSERT ACUTAL NUMBER example test files that have already been created in the directory /cmake-build-debug/TestFiles/. They have a different
+There are already 15 example test files that have already been created in the directory /cmake-build-debug/TestFiles/. They have a different
 number of rows and columns are are a 2 dimensional grid of 0's and 1's that represent the points from which we create a convex hull.  
 ``Make sure that if you create your own input test files that they are in the directory mentioned above or our program will not be able to find it.``
 
 ## Command Line Arguments 
-Command line arguments should be in the form ``<input_file> <num_rows> <num_columns>``. Like previously mentioned there are already test files that you can use ranging from test_1.txt to test_15.txt that you can use just make sure to use the appropriate number of rows and columns based on the text file that you are using.
+Command line arguments should be in the form ``<input_file> <num_rows> <num_columns>``. Like previously mentioned there are already test files that you can use ranging from test_1_5_5.txt to test_15_3_4.txt that you can use. Make sure that you use the appropraite number of rows and columns based on the text file that you are using.
+All of the text files that have already been created have the number of rows and columns as the second and third numbers in their name. So test_15_3_4.txt has
+3 rows and 4 columns so you should use the following command line arguments, ``test_15_3_4.txt 3 4``.
 
 ## Runtime Instructions
 Run the program with the command line arguments as specified above and then wait a few moments while the gif is created. If you are using a input file with the 
