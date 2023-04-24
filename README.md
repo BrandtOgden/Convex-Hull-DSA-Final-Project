@@ -64,5 +64,57 @@ Run the program with the command line arguments as specified above and then wait
 number of rows being 6 or greater, it can take more than a minute for the gif to be created.
 
 ## Sample Runs
-Should probably include this but not sure if it is necessary
+
+### test_1_5_5.txt
+Input:
+```
+0 1 0 0 0
+1 0 1 1 0
+0 1 1 0 1
+1 0 0 0 1
+0 1 0 0 0
+```
+
+GIF created:
+![https://user-images.githubusercontent.com/123508751/234115049-0649b5c7-892e-451c-9649-7c666ff1e522.gif](https://user-images.githubusercontent.com/123508751/234115049-0649b5c7-892e-451c-9649-7c666ff1e522.gif)
+
+
+### test_7_4_3.txt
+Input:  
+```
+0 1 1
+0 1 0
+0 0 1
+1 1 0
+```
+GIF created:  
+![https://user-images.githubusercontent.com/123508751/234115052-9234b0b9-1edb-48b2-b0f5-f9bb08f8d4bd.gif](https://user-images.githubusercontent.com/123508751/234115052-9234b0b9-1edb-48b2-b0f5-f9bb08f8d4bd.gif)
+
+
+### test_12_2_2.txt
+Input:  
+```
+0 0
+0 1
+```
+Output:  
+![https://user-images.githubusercontent.com/123508751/234115044-28f8b343-156e-47f9-af4a-d0307a7c261b.png](https://user-images.githubusercontent.com/123508751/234115044-28f8b343-156e-47f9-af4a-d0307a7c261b.png)
+
+
+### test_13_6_6.txt
+Input:  
+```
+1 1 1 0 0 1
+1 0 1 1 0 1
+0 0 0 1 1 0
+1 0 1 1 1 0
+0 0 0 1 1 0
+0 0 1 0 0 1
+```
+GIF created:  
+![https://user-images.githubusercontent.com/123508751/234115045-a4a9321c-a52e-4c0a-aba8-b3d88cc86ee8.gif](https://user-images.githubusercontent.com/123508751/234115045-a4a9321c-a52e-4c0a-aba8-b3d88cc86ee8.gif)
+
+
+
+
 
