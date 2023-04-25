@@ -184,7 +184,7 @@ std::stack<Point> Grid::calculate_convex_hull(std::string ss) {
         edit_graph(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col), "blue");
         render_graph(ss, graph_name());
 
-        // bottom left to sorted[1] (always true)
+        // sorted[0] to sorted[1] (always true)
         add_edge(ss, std::to_string(this->sorted_points[0].row) + std::to_string(this->sorted_points[0].col),
                  std::to_string(this->sorted_points[1].row) + std::to_string(this->sorted_points[1].col), "green");
         render_graph(ss, graph_name());
