@@ -54,9 +54,9 @@ number of rows and columns are are a 2 dimensional grid of 0's and 1's that repr
 ``Make sure that if you create your own input test files that they are in the directory mentioned above or the program will not be able to find it.``
 
 ## Command Line Arguments 
-Command line arguments should be in the form ``<input_file> <num_rows> <num_columns>``. Like previously mentioned, there are already test files that you can use ranging from test_1_5_5.txt to test_15_3_4.txt that you can use. Make sure that you use the appropraite number of rows and columns based on the text file that you are using.
+Command line arguments should be in the form ``<input_file> <num_rows> <num_columns> "cmake-build-debug"``. Like previously mentioned, there are already test files that you can use ranging from test_1_5_5.txt to test_15_3_4.txt that you can use. Make sure that you use the appropraite number of rows and columns based on the text file that you are using.
 All of the text files that have already been created have the number of rows and columns as the second and third numbers in their name. So test_15_3_4.txt has
-3 rows and 4 columns so you should use the following command line arguments, ``test_15_3_4.txt 3 4``.
+3 rows and 4 columns so you should use the following command line arguments, ``test_15_3_4.txt 3 4``. If you are compiling using g++ please use the ``cmake-build-debug`` and if you are compiling using Clion use ``CLion`` instead.
 
 ## Runtime Instructions
 Run the program with the command line arguments as specified above and then wait a few moments while the gif is created. If you are using a input file with the 
