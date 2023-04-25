@@ -6,18 +6,32 @@
 #include <string>
 #include <vector>
 
+
 int main(int argc, char* argv[]) {
+    std::string clion = argv[4];
+
     // delete the jpgs from the last run
-    system("for %i in (frames\\*.jpg) do del \"%i\"");
+    if (clion == "cmake-build-debug") {
+        system("for %i in (cmake-build-debug\\frames\\*.jpg) do del \"%i\"");
+    } else {
+        system("for %i in (frames\\*.jpg) do del \"%i\"");
+    }
 
     std::string f_name = argv[1];
     int row = std::stoi(argv[2]);
     int col = std::stoi(argv[3]);
 
-    Grid g = Grid(f_name, row, col);
+    Grid g = Grid(f_name, row, col, clion);
 
     // Checks for if the file could be opened
-    std::ifstream infile("TestFiles/" + f_name);
+    std::ifstream infile;
+
+    if (clion == "cmake-build-debug") {
+        infile.open(clion + "/TestFiles/" + f_name);
+    } else {
+        infile.open("TestFiles/" + f_name);
+    }
+
     if (!infile.is_open()) {
         std::cout << "Couldn't open file, please try again and make sure file is in the correct directory!" << std::endl;
     } else {

@@ -20,13 +20,20 @@ Grid::Grid() {
 }
 
 // Constructor for a Grid with an input file specified by the user
-Grid::Grid(std::string f_name, int r, int c) {
+Grid::Grid(std::string f_name, int r, int c, std::string clion) {
     this->rows = r;
     this->cols = c;
     this->grid = std::vector<std::vector<int> >(r, std::vector<int>(c, 0));;
+    this->clion = clion;
 
     std::ifstream file_ptr;
-    std::string path = "TestFiles/" + f_name;
+    std::string path;
+    if (clion == "cmake-build-debug") {
+        path = clion + "/TestFiles/" + f_name;
+    } else {
+        path = "TestFiles/" + f_name;
+    }
+
     file_ptr.open(path);
     int temp;
     std::string placeholder;
@@ -464,7 +471,11 @@ void Grid::render_graph(std::string& ss, std::string graph_name) {
     GVC_t *gvc = gvContext();
     Agraph_t *g = agmemread(ss.c_str());
     gvLayout(gvc, g, "dot");
-    gvRenderFilename(gvc, g, "jpg", ("frames/" + graph_name).c_str());
+    if (clion == "cmake-build-debug") {
+        gvRenderFilename(gvc, g, "jpg", (clion + "/frames/" + graph_name).c_str());
+    } else {
+        gvRenderFilename(gvc, g, "jpg", ("frames/" + graph_name).c_str());
+    }
     // Free the graph and context resources
     agclose(g);
     gvFreeContext(gvc);
@@ -488,10 +499,14 @@ Point &Grid::get_bottom_point() {
 void Grid::generate_gif() {
     // execute a system command to use the Image Magic API to convert the frames to a gif with 40 milliseconds
     // in between and a delay for 300 milliseconds for the last frame
-    system("convert -delay 40 -dispose previous -loop 0 frames/*.jpg -delay 200 frames/last_frame.jpg frames/graph.gif");
-    // execute a system command to open the graph for easy access
+    if (clion == "cmake-build-debug") {
+        system("convert -delay 40 -dispose previous -loop 0 cmake-build-debug/frames/*.jpg -delay 200 cmake-build-debug/frames/last_frame.jpg cmake-build-debug/frames/graph.gif");
+        system("start cmake-build-debug/frames/graph.gif");
+    } else {
+        system("convert -delay 40 -dispose previous -loop 0 frames/*.jpg -delay 200 frames/last_frame.jpg frames/graph.gif");
+        system("start frames/graph.gif");
+    }
 
     std::cout << "Done" << std::endl;
 
-    system("start frames/graph.gif");
 }

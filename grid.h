@@ -14,6 +14,7 @@ private:
     std::vector<Point> sorted_points;
 
     int graph_count = 1;
+    std::string clion;
 
     // Helper methods for calculating the convex hull
     void set_bottom_point();
@@ -23,7 +24,7 @@ private:
 
 public:
     Grid();
-    Grid(std::string fname, int rows, int cols);
+    Grid(std::string fname, int rows, int cols, std::string clion);
     Point &get_bottom_point();
 
     void display_grid();
