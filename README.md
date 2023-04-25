@@ -26,7 +26,7 @@ Since we're using the Dot Language provided by Graphviz, you will need to instal
 3. Restart your computer so all the changes to your environment variables work properly.
 4. If you're compiling on the command line then use this command below. If you're using CLion, please proceed with steps 5 and 6.
 ```
-g++ -o dsa main.cpp grid.cpp point.cpp -IC:/Program Files/Graphviz/include -LC:/Program Files/Graphviz/lib -lgvc -lcgraph
+ g++ -o dsa main.cpp grid.cpp point.cpp -I "/Program Files/Graphviz/include" -L "/Program Files/Graphviz/lib" -lgvc -lcgraph
 ```
 
 5. Make sure this text is included in your CMakeLists.txt in order to properly include your installation directory and to reference which libraries we'll be using.
