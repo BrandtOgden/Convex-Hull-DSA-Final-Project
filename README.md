@@ -15,12 +15,10 @@ until there are no more sorted points left.
 
 Our program implements this algorithm and provides a visualization of this algorithm finding the convex hull in the form of a GIF.
 
-## Compilation Instructions
-**TALK TO RYAN ABOUT CHANGING THIS**  
+## Compilation Instructions 
 The output will be a series of images which make up the graph through each step, which will then be complied into a GIF. The old images will be deleted after every run of the program.
 Since we're using the Dot Language provided by Graphviz, you will need to install Graphviz on your computer to run the program. 
-
-**TALK TO RYAN ABOUT CHANGING THIS**  
+ 
 1. Install Graphviz on your computer https://graphviz.org/download/. Make sure when installing to check the box "Add Graphviz to the system PATH", as seen in the picture below.
    ![graphvizinstallpicture.jpg](graphvizinstallpicture.png)
 2. Install Image Magick as well https://imagemagick.org/script/download.php. Like with Graphviz, make sure to check all the boxes that are listed in this picture below.   
