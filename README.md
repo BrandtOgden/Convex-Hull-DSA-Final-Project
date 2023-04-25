@@ -17,17 +17,16 @@ Our program implements this algorithm and provides a visualization of this algor
 
 ## Compilation Instructions
 **TALK TO RYAN ABOUT CHANGING THIS**  
-The output will be a series of images which make up the graph through each step, as well as a Gif that can be independently created with the included batch file. 
+The output will be a series of images which make up the graph through each step, which will then be complied into a GIF. The old images will be deleted after every run of the program.
 Since we're using the Dot Language provided by Graphviz, you will need to install Graphviz on your computer to run the program. 
 
 **TALK TO RYAN ABOUT CHANGING THIS**  
-If you're using CLion to compile the program, make sure you:
 1. Install Graphviz on your computer https://graphviz.org/download/. Make sure when installing to check the box "Add Graphviz to the system PATH", as seen in the picture below.
    ![graphvizinstallpicture.jpg](graphvizinstallpicture.png)
 2. Install Image Magick as well https://imagemagick.org/script/download.php. Like with Graphviz, make sure to check all the boxes that are listed in this picture below.   
    ![image_magick_install_picture.png](image_magick_install_picture.png)
-4. Restart your computer so all the changes to your environment variables work properly.
-5. If you're compiling on the command line then use this command below. If you're using CLion, please proceed with steps 5 and 6.
+3. Restart your computer so all the changes to your environment variables work properly.
+4. If you're compiling on the command line then use this command below. If you're using CLion, please proceed with steps 5 and 6.
 ```
 g++ -o dsa main.cpp grid.cpp point.cpp -IC:/Program Files/Graphviz/include -LC:/Program Files/Graphviz/lib -lgvc -lcgraph
 ```
@@ -48,7 +47,7 @@ link_directories(${GRAPHVIZ_LIBRARY_DIRS})
 add_executable(Convex_Hull_DSA_Final_Project main.cpp grid.cpp point.cpp)
 target_link_libraries(Convex_Hull_DSA_Final_Project gvc cgraph)
 ```
-Note that in the "set(GRAPHVIZ_INCLUDE_DIRS..." lines you will need to change the installation directtory to the one you picked when installing Graphviz. The CMakeLists file provided should have the default location.  
+Note that in the "set(GRAPHVIZ_INCLUDE_DIRS..." lines you will need to change the installation directory to the one you picked when installing Graphviz. The CMakeLists file provided should have the default location.  
 6. Reload the CMake project
 
 ### Input Text Files
