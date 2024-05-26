@@ -9,7 +9,6 @@ class Point {
 private:
     int row;
     int col;
-    float slope;
 
     friend class Grid;
 

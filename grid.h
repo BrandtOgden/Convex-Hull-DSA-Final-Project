@@ -20,6 +20,7 @@ private:
     void set_bottom_point();
     std::vector<Point> get_all_points();
     void sort_points();
+    void sort(std::vector<Point> vector);
     bool turn_right(Point p1, Point p2, Point p3);
 
 public:
